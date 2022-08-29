@@ -9,7 +9,7 @@ const DB = process.env.DATABASE.replace(
   process.env.DATABASE_PASSWORD
 );
 
-// TODO: connect to database
+// TODO: connect to DB
 
 const port = process.env.PORT;
 app.listen(port, () => {
