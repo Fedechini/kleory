@@ -1,9 +1,50 @@
-const { findByIdAndUpdate } = require('../models/postModel');
 const Post = require('../models/postModel');
 
 exports.getAllPosts = async (req, res) => {
   try {
-    const posts = await Post.find();
+    // build query
+    const queryObj = { ...req.query };
+    const excludedFields = ['page', 'sort', 'limit', 'fields'];
+    excludedFields.forEach((el) => delete queryObj[el]);
+
+    // filter by post containing specific string
+    let queryStr = JSON.stringify(queryObj);
+    queryStr = queryStr.replace(/\b(regex)\b/g, (match) => `$${match}`);
+
+    let query = Post.find(JSON.parse(queryStr));
+
+    // sort results
+    if (req.query.sort) {
+      const sortBy = req.query.sort.split(',').join(' ');
+      query = query.sort(sortBy);
+    } else {
+      query = query.sort('-createdAt');
+    }
+
+    // limit fields
+    if (req.query.fields) {
+      const fields = req.query.fields.split(',').join(' ');
+      query = query.select(fields);
+    } else {
+      query.select('-__v');
+    }
+
+    // pagination
+    const page = req.query.page * 1 || 1;
+    const limit = req.query.limit * 1 || 50;
+    const skip = (page - 1) * limit;
+
+    query = query.skip(skip).limit(limit);
+
+    if (req.query.page) {
+      const numPosts = await Post.countDocuments();
+      if (skip >= numPosts) {
+        throw new Error('This page does not exist');
+      }
+    }
+
+    // execute query
+    const posts = await query;
 
     res.status(200).json({
       status: 'succes',
