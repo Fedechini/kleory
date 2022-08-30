@@ -3,8 +3,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const postRouter = require('./routes/postRoutes');
 
 const app = express();
 
@@ -20,7 +19,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ROUTES
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/v1/post', postRouter);
 
 module.exports = app;
