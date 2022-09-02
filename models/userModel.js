@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please provide a password'],
     minlength: 8,
+    select: false,
   },
   passwordConfirm: {
     type: String,
@@ -32,9 +33,13 @@ const userSchema = new mongoose.Schema({
       message: 'Passwords do not match',
     },
   },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
 });
 
-// hash password if is been modified
+// hash password if is been modified / new user created
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
 
@@ -44,6 +49,13 @@ userSchema.pre('save', async function (next) {
   this.passwordConfirm = undefined;
   next();
 });
+
+userSchema.methods.isPasswordValid = async function (
+  candidatePassword,
+  userPassword
+) {
+  return await bcrypt.compare(candidatePassword, userPassword);
+};
 
 const User = mongoose.model('User', userSchema);
 
