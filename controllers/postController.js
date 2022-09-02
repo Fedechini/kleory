@@ -1,6 +1,7 @@
 const Post = require('../models/postModel');
 const APIFeatures = require('../utils/apiFeatures');
 const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
 
 exports.getAllPosts = catchAsync(async (req, res, next) => {
   const features = new APIFeatures(Post, req.query)
@@ -8,6 +9,7 @@ exports.getAllPosts = catchAsync(async (req, res, next) => {
     .sort()
     .limitFields()
     .paginate();
+
   const posts = await features.model;
 
   res.status(200).json({
@@ -21,6 +23,10 @@ exports.getAllPosts = catchAsync(async (req, res, next) => {
 
 exports.getPost = catchAsync(async (req, res, next) => {
   const post = await Post.findById(req.params.id);
+
+  if (!post) {
+    return next(new AppError('No post found with that ID', 404));
+  }
 
   res.status(200).json({
     status: 'succes',
@@ -47,6 +53,10 @@ exports.updatePost = catchAsync(async (req, res, next) => {
     runValidators: true,
   });
 
+  if (!post) {
+    return next(new AppError('No post found with that ID', 404));
+  }
+
   res.status(201).json({
     status: 'succes',
     data: {
@@ -56,7 +66,11 @@ exports.updatePost = catchAsync(async (req, res, next) => {
 });
 
 exports.deletePost = catchAsync(async (req, res, next) => {
-  await Post.findByIdAndDelete(req.params.id);
+  const post = await Post.findByIdAndDelete(req.params.id);
+
+  if (!post) {
+    return next(new AppError('No post found with that ID', 404));
+  }
 
   res.status(204).json({
     status: 'succes',
