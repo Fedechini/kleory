@@ -11,6 +11,30 @@ const signToken = (id) => {
   });
 };
 
+const createSendToken = (user, statusCode, res) => {
+  const token = signToken(user._id);
+  const cookieOptions = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+  };
+  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+
+  res.cookie('jwt', token, cookieOptions);
+
+  // remove password from output
+  user.password = undefined;
+
+  res.status(statusCode).json({
+    status: 'succes',
+    token,
+    data: {
+      user,
+    },
+  });
+};
+
 exports.signup = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
     name: req.body.name,
@@ -19,15 +43,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     passwordConfirm: req.body.passwordConfirm,
   });
 
-  const token = signToken(newUser._id);
-
-  res.status(201).json({
-    status: 'succes',
-    token,
-    data: {
-      user: newUser,
-    },
-  });
+  createSendToken(newUser, 201, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -44,12 +60,7 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError('Incorrect email or password', 401));
   }
 
-  const token = signToken(user._id);
-
-  res.status(200).json({
-    status: 'succes',
-    token,
-  });
+  createSendToken(user, 200, res);
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -87,7 +98,7 @@ exports.protect = catchAsync(async (req, res, next) => {
     );
   }
 
-  // grant acces to protected route && store logged in user in req for easy future use
+  // store logged in user in req for easy future use
   req.user = user;
   next();
 });
@@ -160,10 +171,10 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     passwordResetExpires: { $gt: Date.now() },
   });
 
-  // if token valid, set new password
   if (!user) {
     return next(new AppError('Token is invalid or has expired', 400));
   }
+  // if token valid, set new password
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
   user.passwordResetToken = undefined;
@@ -173,10 +184,23 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   // update passwordChangedAt
   // log user in
-  const token = signToken(user._id);
+  createSendToken(user, 200, res);
+});
 
-  res.status(200).json({
-    status: 'succes',
-    token,
-  });
+exports.updatePassword = catchAsync(async (req, res, next) => {
+  // get user
+  const user = await User.findById(req.user.id).select('+password');
+
+  // check if password is valid
+  if (!(await user.isPasswordValid(req.body.currentPassword, user.password))) {
+    return next(new AppError('Your current password is not valid', 401));
+  }
+  // update password
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+
+  await user.save();
+
+  // log user in
+  createSendToken(user, 200, res);
 });
