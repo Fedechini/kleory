@@ -49,3 +49,55 @@ exports.login = catchAsync(async (req, res, next) => {
     token,
   });
 });
+
+exports.protect = catchAsync(async (req, res, next) => {
+  // get token and check if its there
+  let token;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    token = req.headers.authorization.split(' ')[1];
+  }
+
+  if (!token) {
+    return next(new AppError('Please log in to get acces.', 401));
+  }
+
+  // verificate token
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+  // check if user still exist
+  const user = await User.findById(decoded.id);
+  if (!user) {
+    return next(
+      new AppError(
+        'The user belonging to this token does not longer exist',
+        401
+      )
+    );
+  }
+
+  // check if user changed password after token was issued
+  if (user.changedPasswordAfter(decoded.iat)) {
+    return next(
+      new AppError('User recently changed password! Please log in again', 401)
+    );
+  }
+
+  // grant acces to protected route && store logged in user in req for easy future use
+  req.user = user;
+  next();
+});
+
+exports.restrictTo = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new AppError('You do not have permision to perform this action!', 403)
+      );
+    }
+
+    next();
+  };
+};
