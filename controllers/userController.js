@@ -23,6 +23,21 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getUser = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(new AppError('There is no user with that ID', 404));
+  }
+
+  res.status(200).json({
+    status: 'succes',
+    data: {
+      user,
+    },
+  });
+});
+
 exports.updateMe = catchAsync(async (req, res, next) => {
   if (req.body.password || req.body.passwordConfirm) {
     return new AppError(

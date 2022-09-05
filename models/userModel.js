@@ -3,6 +3,8 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 
+// TODO: ADD REFERENCE TO POSTS FROM THIS USER
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,

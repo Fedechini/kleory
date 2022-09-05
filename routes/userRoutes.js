@@ -9,7 +9,6 @@ router.post('/login', authController.login);
 
 router.post('/forgotPassword', authController.forgotPassword);
 router.patch('/resetPassword/:token', authController.resetPassword);
-
 router.patch(
   '/updateMyPassword',
   authController.protect,
@@ -26,5 +25,7 @@ router
     authController.restrictTo('admin'),
     userController.getAllUsers
   );
+
+router.route('/:id').get(authController.protect, userController.getUser);
 
 module.exports = router;

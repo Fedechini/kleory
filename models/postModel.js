@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const ms = require('ms');
 
 const postSchema = new mongoose.Schema(
   {
@@ -18,14 +17,6 @@ const postSchema = new mongoose.Schema(
       type: Date,
       default: Date.now(),
     },
-    commentsQuantity: {
-      type: Number,
-      default: 0,
-    },
-    likesQuantity: {
-      type: Number,
-      default: 0,
-    },
   },
   {
     toJSON: { virtuals: true },
@@ -33,10 +24,11 @@ const postSchema = new mongoose.Schema(
   }
 );
 
-postSchema.virtual('postedAgo').get(function () {
-  const msToDate = ms(Date.now() - this.createdAt);
-
-  return `${msToDate} ago`;
+// virtual populate - so we dont store big array in DB
+postSchema.virtual('comments', {
+  ref: 'Comment',
+  foreignField: 'post',
+  localField: '_id',
 });
 
 const Post = mongoose.model('Post', postSchema);
