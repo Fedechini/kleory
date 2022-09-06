@@ -3,56 +3,68 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 
-// TODO: ADD REFERENCE TO POSTS FROM THIS USER
+// TODO: ADD REFERENCE TO POSTS FROM USER
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'User must have a name'],
-    maxlength: [20, 'Username must not be longer than 20 characters'],
-  },
-  email: {
-    type: String,
-    required: [true, 'Please provide your email'],
-    unique: true,
-    lowercase: true,
-    validate: [validator.isEmail, 'Please provide a valid email'],
-  },
-  photo: String,
-  role: {
-    type: String,
-    enum: ['user', 'admin'],
-    default: 'user',
-  },
-  password: {
-    type: String,
-    required: [true, 'Please provide a password'],
-    minlength: 8,
-    select: false,
-  },
-  passwordConfirm: {
-    type: String,
-    required: [true, 'Please confirm your password'],
-    validate: {
-      // this validator only works on CREATE() and SAVE()
-      validator: function (passwordConfirm) {
-        return passwordConfirm === this.password;
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, 'User must have a name'],
+      maxlength: [20, 'Username must not be longer than 20 characters'],
+    },
+    email: {
+      type: String,
+      required: [true, 'Please provide your email'],
+      unique: true,
+      lowercase: true,
+      validate: [validator.isEmail, 'Please provide a valid email'],
+    },
+    photo: String,
+    role: {
+      type: String,
+      enum: ['user', 'admin'],
+      default: 'user',
+    },
+    password: {
+      type: String,
+      required: [true, 'Please provide a password'],
+      minlength: 8,
+      select: false,
+    },
+    passwordConfirm: {
+      type: String,
+      required: [true, 'Please confirm your password'],
+      validate: {
+        // this validator only works on CREATE() and SAVE()
+        validator: function (passwordConfirm) {
+          return passwordConfirm === this.password;
+        },
+        message: 'Passwords do not match',
       },
-      message: 'Passwords do not match',
+    },
+    passwordChangedAt: Date,
+    createdAt: {
+      type: Date,
+      default: Date.now(),
+    },
+    passwordResetToken: String,
+    passwordResetExpires: Date,
+    active: {
+      type: Boolean,
+      default: true,
+      select: false,
     },
   },
-  passwordChangedAt: Date,
-  createdAt: {
-    type: Date,
-    default: Date.now(),
-  },
-  passwordResetToken: String,
-  passwordResetExpires: Date,
-  active: {
-    type: Boolean,
-    default: true,
-    select: false,
-  },
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
+
+userSchema.virtual('posts', {
+  ref: 'Post',
+  foreignField: 'author',
+  localField: '_id',
 });
 
 // hash password if is been modified / new user created

@@ -17,6 +17,11 @@ const postSchema = new mongoose.Schema(
       type: Date,
       default: Date.now(),
     },
+    author: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      required: [true, 'Post must belong to an user'],
+    },
   },
   {
     toJSON: { virtuals: true },
@@ -29,6 +34,15 @@ postSchema.virtual('comments', {
   ref: 'Comment',
   foreignField: 'post',
   localField: '_id',
+});
+
+postSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'author',
+    select: 'name photo',
+  });
+
+  next();
 });
 
 const Post = mongoose.model('Post', postSchema);

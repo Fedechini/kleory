@@ -24,7 +24,10 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
 });
 
 exports.getUser = catchAsync(async (req, res, next) => {
-  const user = await User.findById(req.params.id);
+  const user = await User.findById(req.params.id).populate({
+    path: 'posts',
+    select: 'title -author',
+  });
 
   if (!user) {
     return next(new AppError('There is no user with that ID', 404));
