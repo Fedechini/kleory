@@ -1,9 +1,12 @@
 const Comment = require('../models/commentModel');
-const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
+const factory = require('./handlerFactory');
 
 exports.getAllComments = catchAsync(async (req, res, next) => {
-  const comments = await Comment.find();
+  let filter = {};
+  if (req.params.postId) filter = { post: req.params.postId };
+
+  const comments = await Comment.find(filter);
 
   res.status(200).json({
     status: 'succes',
@@ -14,13 +17,14 @@ exports.getAllComments = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.createComment = catchAsync(async (req, res, next) => {
-  const newComment = await Comment.create(req.body);
+exports.setUserData = (req, res, next) => {
+  if (!req.body.post) req.body.post = req.params.postId;
+  if (!req.body.user) req.body.user = req.user.id;
 
-  res.status(201).json({
-    status: 'succes',
-    data: {
-      comment: newComment,
-    },
-  });
-});
+  next();
+};
+
+exports.getComment = factory.getOne(Comment);
+exports.createComment = factory.createOne(Comment);
+exports.updateComment = factory.updateOne(Comment);
+exports.deleteComment = factory.deleteOne(Comment);

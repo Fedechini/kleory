@@ -1,6 +1,8 @@
 const User = require('../models/userModel');
+const APIFeatures = require('../utils/apiFeatures');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
+const factory = require('./handlerFactory');
 
 const filterObj = (obj, ...allowedToUpdate) => {
   const newObject = {};
@@ -12,31 +14,19 @@ const filterObj = (obj, ...allowedToUpdate) => {
 };
 
 exports.getAllUsers = catchAsync(async (req, res, next) => {
-  const users = await User.find();
+  const features = new APIFeatures(User, req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate();
+
+  const users = await features.model;
 
   res.status(200).json({
     status: 'succes',
     results: users.length,
     data: {
       users,
-    },
-  });
-});
-
-exports.getUser = catchAsync(async (req, res, next) => {
-  const user = await User.findById(req.params.id).populate({
-    path: 'posts',
-    select: 'title -author',
-  });
-
-  if (!user) {
-    return next(new AppError('There is no user with that ID', 404));
-  }
-
-  res.status(200).json({
-    status: 'succes',
-    data: {
-      user,
     },
   });
 });
@@ -74,3 +64,10 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
     data: null,
   });
 });
+
+exports.getUser = factory.getOne(User, {
+  path: 'posts',
+  select: 'title -author',
+});
+exports.updateUser = factory.updateOne(User);
+exports.deleteUser = factory.deleteOne(User);

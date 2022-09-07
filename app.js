@@ -12,7 +12,7 @@ const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const postRouter = require('./routes/postRoutes');
 const userRouter = require('./routes/userRoutes');
-const commentRouter = require('./routes/commentRouter');
+const commentRouter = require('./routes/commentRoutes');
 
 const app = express();
 
