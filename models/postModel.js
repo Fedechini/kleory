@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+// TODO: commentsQuantity & implement likes & likesQuantity in comments and posts
+
 const postSchema = new mongoose.Schema(
   {
     title: {
@@ -21,6 +23,10 @@ const postSchema = new mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: 'User',
       required: [true, 'Post must belong to an user'],
+    },
+    commentsQuantity: {
+      type: Number,
+      default: 0,
     },
   },
   {

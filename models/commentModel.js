@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Post = require('./postModel');
 
 const commentSchema = new mongoose.Schema(
   {
@@ -34,6 +35,39 @@ commentSchema.pre(/^find/, function (next) {
   });
 
   next();
+});
+
+commentSchema.statics.calcCommentsQuantity = async function (postId) {
+  // this = model
+  const stats = await this.aggregate([
+    {
+      $match: { post: postId },
+    },
+    {
+      $group: {
+        _id: '$post',
+        comments: { $sum: 1 },
+      },
+    },
+  ]);
+
+  if (stats.length > 0) {
+    await Post.findByIdAndUpdate(postId, {
+      commentsQuantity: stats[0].comments,
+    });
+  } else {
+    await Post.findByIdAndUpdate(postId, { commentsQuantity: 0 });
+  }
+};
+
+commentSchema.post('save', function () {
+  // this = current comment // this.constructor = model
+  this.constructor.calcCommentsQuantity(this.post);
+});
+
+commentSchema.post('findOneAndDelete', async function (doc) {
+  // doc = current comment
+  await doc.constructor.calcCommentsQuantity(doc.post);
 });
 
 const Comment = mongoose.model('Comment', commentSchema);
