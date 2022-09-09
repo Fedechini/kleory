@@ -4,19 +4,18 @@ const commentController = require('../controllers/commentController');
 
 const router = express.Router({ mergeParams: true });
 
+// protect all routes after this middleware
+router.use(authController.protect);
+
 router
   .route('/')
-  .get(authController.protect, commentController.getAllComments)
-  .post(
-    authController.protect,
-    commentController.setUserData,
-    commentController.createComment
-  );
+  .get(commentController.getAllComments)
+  .post(commentController.setUserData, commentController.createComment);
 
 router
   .route('/:id')
-  .get(authController.protect, commentController.getComment)
-  .patch(authController.protect, commentController.updateComment)
-  .delete(authController.protect, commentController.deleteComment);
+  .get(commentController.getComment)
+  .patch(commentController.updateComment)
+  .delete(commentController.deleteComment);
 
 module.exports = router;
