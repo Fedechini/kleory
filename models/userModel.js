@@ -52,6 +52,13 @@ const userSchema = new mongoose.Schema(
       default: true,
       select: false,
     },
+    friends: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+        unique: true,
+      },
+    ],
   },
   {
     toJSON: { virtuals: true },
@@ -130,6 +137,14 @@ userSchema.methods.createPasswordResetToken = function () {
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 
   return resetToken;
+};
+
+userSchema.methods.addAsFriend = function (friendReq) {
+  if (!this.friends.includes(friendReq.from.id)) {
+    this.friends.push(friendReq.from.id);
+  }
+
+  return this.friends;
 };
 
 const User = mongoose.model('User', userSchema);

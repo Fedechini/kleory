@@ -2,18 +2,6 @@ const Friend = require('../models/friendModel');
 const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory');
 
-exports.getAllFriendRequest = catchAsync(async (req, res, next) => {
-  const friendReq = await Friend.find();
-
-  res.status(200).json({
-    status: 'succes',
-    results: friendReq.length,
-    data: {
-      friendRequests: friendReq,
-    },
-  });
-});
-
 exports.setUserData = (req, res, next) => {
   if (!req.body.from) req.body.from = req.user.id;
 
@@ -21,7 +9,7 @@ exports.setUserData = (req, res, next) => {
 };
 
 exports.acceptFriend = catchAsync(async (req, res, next) => {
-  const accept = await Friend.findByIdAndUpdate(
+  const acceptReq = await Friend.findByIdAndUpdate(
     req.params.id,
     {
       status: 'accepted',
@@ -29,14 +17,21 @@ exports.acceptFriend = catchAsync(async (req, res, next) => {
     { new: true, runValidators: true }
   );
 
+  const friendList = req.user.addAsFriend(acceptReq);
+  await req.user.save({ validateBeforeSave: false });
+
   res.status(200).json({
     status: 'succes',
-    data: accept,
+    data: friendList,
   });
 });
 
 exports.rejectFriend = catchAsync(async (req, res, next) => {
-  await Friend.findByIdAndUpdate(req.params.id, { status: 'rejected' });
+  await Friend.findByIdAndUpdate(
+    req.params.id,
+    { status: 'rejected' },
+    { new: true, runValidators: true }
+  );
 
   res.status(204).json({
     status: 'succes',
@@ -44,6 +39,7 @@ exports.rejectFriend = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getAllFriendRequest = factory.getAll(Friend);
 exports.deleteFriendRequest = factory.deleteOne(Friend);
 exports.getFriendRequest = factory.getOne(Friend);
 exports.createFriendRequest = factory.createOne(Friend);

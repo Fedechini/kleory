@@ -13,24 +13,6 @@ const filterObj = (obj, ...allowedToUpdate) => {
   return newObject;
 };
 
-exports.getAllUsers = catchAsync(async (req, res, next) => {
-  const features = new APIFeatures(User, req.query)
-    .filter()
-    .sort()
-    .limitFields()
-    .paginate();
-
-  const users = await features.model;
-
-  res.status(200).json({
-    status: 'succes',
-    results: users.length,
-    data: {
-      users,
-    },
-  });
-});
-
 exports.getMe = (req, res, next) => {
   req.params.id = req.user.id;
 
@@ -77,6 +59,9 @@ exports.getUser = factory.getOne(User, [
     select: 'title -author',
   },
   { path: 'friendReq', select: 'from -to' },
+  { path: 'friends', select: 'name photo' },
 ]);
+
+exports.getAllUsers = factory.getAll(User);
 exports.updateUser = factory.updateOne(User);
 exports.deleteUser = factory.deleteOne(User);
