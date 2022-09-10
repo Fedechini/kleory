@@ -20,6 +20,30 @@ exports.setUserData = (req, res, next) => {
   next();
 };
 
+exports.acceptFriend = catchAsync(async (req, res, next) => {
+  const accept = await Friend.findByIdAndUpdate(
+    req.params.id,
+    {
+      status: 'accepted',
+    },
+    { new: true, runValidators: true }
+  );
+
+  res.status(200).json({
+    status: 'succes',
+    data: accept,
+  });
+});
+
+exports.rejectFriend = catchAsync(async (req, res, next) => {
+  await Friend.findByIdAndUpdate(req.params.id, { status: 'rejected' });
+
+  res.status(204).json({
+    status: 'succes',
+    data: null,
+  });
+});
+
 exports.deleteFriendRequest = factory.deleteOne(Friend);
 exports.getFriendRequest = factory.getOne(Friend);
 exports.createFriendRequest = factory.createOne(Friend);

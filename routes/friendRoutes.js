@@ -6,8 +6,6 @@ const router = express.Router();
 
 router.use(authController.protect);
 
-// TODO: implement accept & delete frienReq and friend list
-
 router
   .route('/')
   .get(friendController.getAllFriendRequest)
@@ -17,5 +15,8 @@ router
   .route('/:id')
   .get(friendController.getFriendRequest)
   .delete(friendController.deleteFriendRequest);
+
+router.get('/acceptFriend/:id', friendController.acceptFriend);
+router.delete('/rejectFriend/:id', friendController.rejectFriend);
 
 module.exports = router;
