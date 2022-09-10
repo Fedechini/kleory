@@ -71,9 +71,12 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getUser = factory.getOne(User, {
-  path: 'posts',
-  select: 'title -author',
-});
+exports.getUser = factory.getOne(User, [
+  {
+    path: 'posts',
+    select: 'title -author',
+  },
+  { path: 'friendReq', select: 'from -to' },
+]);
 exports.updateUser = factory.updateOne(User);
 exports.deleteUser = factory.deleteOne(User);

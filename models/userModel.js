@@ -3,8 +3,6 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 
-// TODO: ADD REFERENCE TO POSTS FROM USER
-
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -64,6 +62,12 @@ const userSchema = new mongoose.Schema(
 userSchema.virtual('posts', {
   ref: 'Post',
   foreignField: 'author',
+  localField: '_id',
+});
+
+userSchema.virtual('friendReq', {
+  ref: 'Friend',
+  foreignField: 'to',
   localField: '_id',
 });
 
