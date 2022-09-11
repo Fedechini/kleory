@@ -139,12 +139,24 @@ userSchema.methods.createPasswordResetToken = function () {
   return resetToken;
 };
 
-userSchema.methods.addAsFriend = function (friendReq) {
-  if (!this.friends.includes(friendReq.from.id)) {
-    this.friends.push(friendReq.from.id);
+userSchema.methods.addAsFriend = function (friendReq, role) {
+  if (role === 'sender') {
+    if (
+      !this.friends.includes(friendReq.to.id) &&
+      this._id !== friendReq.to.id
+    ) {
+      this.friends.push(friendReq.to.id);
+    }
   }
 
-  return this.friends;
+  if (role === 'receiver') {
+    if (
+      !this.friends.includes(friendReq.from.id) &&
+      this._id !== friendReq.from.id
+    ) {
+      this.friends.push(friendReq.from.id);
+    }
+  }
 };
 
 const User = mongoose.model('User', userSchema);

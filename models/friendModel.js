@@ -32,6 +32,9 @@ const friendSchema = new mongoose.Schema(
 friendSchema.index({ from: 1, to: 1 }, { unique: true });
 
 friendSchema.pre(/^find/, function (next) {
+  // show only pending request
+  this.find({ status: 'sent' });
+
   this.populate({
     path: 'from',
     select: 'name photo',
