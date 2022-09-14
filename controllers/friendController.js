@@ -1,3 +1,4 @@
+const { default: mongoose } = require('mongoose');
 const Friend = require('../models/friendModel');
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
@@ -75,7 +76,18 @@ exports.deleteFriend = catchAsync(async (req, res, next) => {
   }
 
   //TODO: delete accepted friendReq request from db
-  const requestToDelete = await Friend.find();
+  const requestToDelete = await Friend.findOneAndDelete({
+    $or: [
+      {
+        from: userB.id,
+        to: userA.id,
+      },
+      {
+        from: userA.id,
+        to: userB.id,
+      },
+    ],
+  });
 
   console.log(requestToDelete);
 
