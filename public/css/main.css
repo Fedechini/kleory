@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+:root {
+  --color-primary-black: rgb(35, 35, 35);
+  --color-primary-white: rgb(240, 240, 240);
+  --color-background-header: rgba(255, 233, 186);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: var(--color-primary-background);
+  font-family: "Roboto", sans-serif;
+}
+
+.header {
+  background-color: var(--color-background-header);
+  padding: 0 5rem;
+  height: 8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header__logo {
+  border-radius: 50%;
+  height: 7.5rem;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+}
+.nav__el, .nav__el:link, .nav__el:visited {
+  color: black;
+  text-transform: uppercase;
+  font-size: 2rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.2s;
+  font-weight: 400;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+.nav__el:hover, .nav__el:active, .nav__el:link:hover, .nav__el:link:active, .nav__el:visited:hover, .nav__el:visited:active {
+  transform: translate(-2px);
+  text-shadow: 0 0.7rem 1rem rgba(0, 0, 0, 0.25);
+}
+.nav__el:not(:last-child), .nav__el:link:not(:last-child), .nav__el:visited:not(:last-child) {
+  margin-right: 3rem;
+}
+
+.nav__el--cta {
+  padding: 1rem 3rem;
+  border-radius: 10rem;
+  transition: all 0.3s;
+  border: 1px solid var(--color-primary-black);
+}
+.nav__el--cta:hover {
+  background-color: var(--color-primary-black);
+  color: var(--color-primary-white);
+  text-shadow: none;
+  border-color: var(--color-primary-black);
+}

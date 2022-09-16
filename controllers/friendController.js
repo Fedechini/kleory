@@ -75,8 +75,7 @@ exports.deleteFriend = catchAsync(async (req, res, next) => {
     return next(new AppError('No friend found with that ID', 404));
   }
 
-  //TODO: delete accepted friendReq request from db
-  const requestToDelete = await Friend.findOneAndDelete({
+  await Friend.findOneAndDelete({
     $or: [
       {
         from: userB.id,
@@ -88,8 +87,6 @@ exports.deleteFriend = catchAsync(async (req, res, next) => {
       },
     ],
   });
-
-  console.log(requestToDelete);
 
   res.status(204).json({
     status: 'succes',

@@ -21,6 +21,9 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+// serve static files
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(helmet());
 app.use(morgan('dev'));
 app.use(express.json({ limit: '10kb' }));
@@ -42,10 +45,14 @@ const limiter = rateLimit({
 });
 app.use('/api', limiter);
 
-// serve static files
-app.use(express.static(path.join(__dirname, 'public')));
-
 // ROUTES
+app.get('/', (req, res) => {
+  res.status(200).render('base', {
+    post: 'Test',
+    user: 'Fedechini',
+  });
+});
+
 app.use('/api/v1/posts', postRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/comments', commentRouter);
