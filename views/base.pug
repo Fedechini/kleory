@@ -4,24 +4,15 @@ html
     meta(charset='UTF-8')
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
     link(rel="stylesheet", href="css/main.css")
-    title Kleory | A fun project
+    title Kleory | #{title}
 
   body
     // HEADER
-    header.header 
-      img.header__logo( src="images/logo.jpeg", alt="Kleory logo")
-      nav.nav.nav--home
-        a.nav__el(href='#') Home 
-      nav.nav.nav--user
-        //- a.nav__el(href='#')
-        //-   img(src="images/user.jpg", alt="User photo")
-        //-   span Federico
-        button.nav__el Log in
-        button.nav__el.nav__el--cta Sign up
+    include _header
 
     // CONTENT
-    section.overview 
-      h1 CONTENT
+    block content 
+      h1 Placeholder Heading
 
 
   

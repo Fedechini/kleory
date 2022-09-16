@@ -14,6 +14,7 @@ const postRouter = require('./routes/postRoutes');
 const userRouter = require('./routes/userRoutes');
 const commentRouter = require('./routes/commentRoutes');
 const friendRouter = require('./routes/friendRoutes');
+const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
 
@@ -46,13 +47,8 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 
 // ROUTES
-app.get('/', (req, res) => {
-  res.status(200).render('base', {
-    post: 'Test',
-    user: 'Fedechini',
-  });
-});
 
+app.use('/', viewRouter);
 app.use('/api/v1/posts', postRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/comments', commentRouter);
