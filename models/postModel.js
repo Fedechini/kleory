@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const ms = require('ms');
 
 // TODO: commentsQuantity & implement likes & likesQuantity in comments and posts
 
@@ -49,6 +50,10 @@ postSchema.pre(/^find/, function (next) {
   });
 
   next();
+});
+
+postSchema.virtual('postedAgo').get(function () {
+  return `${ms(Date.now() - this.createdAt)} ago`;
 });
 
 const Post = mongoose.model('Post', postSchema);

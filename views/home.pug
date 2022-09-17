@@ -1,4 +1,23 @@
 extends base
 
 block content 
-  h1 This is the home
+  main.main
+    .post-container
+
+      each post in posts 
+        .post
+          .post__user 
+            img.post__user--photo(src=`images/users/${post.author.photo}`, alt="User photo")
+            .post__user--name
+              p= post.author.name
+              span= post.postedAgo
+          .post__content 
+            h4.post__content--title= post.title
+            p.post__content--body= post.body
+          .post__likes 
+            p.post__likes--qty 0 likes 
+            a.post__comments--qty(href=`/posts/${post.id}`)= `${post.commentsQuantity} Comments`
+          .post__buttons 
+            button.post__btn Like
+            button.post__btn Comment
+
