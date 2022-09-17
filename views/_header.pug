@@ -1,10 +1,10 @@
 header.header 
-  img.header__logo( src="images/logo.jpeg", alt="Kleory logo")
+  img.header__logo( src="/images/logo.jpeg", alt="Kleory logo")
   nav.nav.nav--home
-    a.nav__el(href='#') Home
+    a.nav__el(href='/') Home
   nav.nav.nav--user  
     //- a.nav__el(href='#')
     //-   img(src="images/users/user.jpg", alt="User photo")
     //-   span Federico
-    button.nav__el Log in  
-    button.nav__el.nav__el--cta Sign up  
+    a(href="/login").nav__el Log in  
+    a(href="/signup").nav__el.nav__el--cta Sign up  

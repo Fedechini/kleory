@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Post = require('./postModel');
+const ms = require('ms');
 
 const commentSchema = new mongoose.Schema(
   {
@@ -68,6 +69,10 @@ commentSchema.post('save', function () {
 commentSchema.post('findOneAndDelete', async function (doc) {
   // doc = current comment
   await doc.constructor.calcCommentsQuantity(doc.post);
+});
+
+commentSchema.virtual('postedAgo').get(function () {
+  return `${ms(Date.now() - this.createdAt)} ago`;
 });
 
 const Comment = mongoose.model('Comment', commentSchema);

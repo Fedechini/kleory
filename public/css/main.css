@@ -52,7 +52,6 @@ body {
   transition: all 0.2s;
   font-weight: 400;
   background: none;
-  border: none;
   cursor: pointer;
   font-family: inherit;
 }
@@ -80,6 +79,7 @@ body {
 .main {
   background-color: #f7f7f7;
   padding: 4rem 3rem;
+  min-height: 92vh;
 }
 
 .post {
@@ -151,7 +151,7 @@ body {
 .post__btn, .post__btn:link, .post__btn:visited {
   background-color: rgb(117, 167, 184);
   width: 100%;
-  padding: 0.25rem;
+  padding: 0.6rem;
   text-transform: uppercase;
   align-items: center;
   transition: all 0.2s;
@@ -159,7 +159,129 @@ body {
   border: none;
   cursor: pointer;
   font-family: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: black;
 }
 .post__btn:hover, .post__btn:active, .post__btn:link:hover, .post__btn:link:active, .post__btn:visited:hover, .post__btn:visited:active {
   background-color: white;
+}
+.post__comment {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  background-color: rgba(190, 190, 190, 0.5);
+}
+.post__comment-photo {
+  height: 4.5rem;
+  border-radius: 50%;
+}
+.post__comment-user {
+  display: flex;
+  margin: 0 0.75rem;
+  gap: 1.25rem;
+}
+.post__comment-user-name {
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+  max-width: min-content;
+}
+.post__comment-user-name > span {
+  font-size: 1.3rem;
+  margin-top: 0.5rem;
+  font-weight: 300;
+}
+.post__comment-content {
+  font-weight: 300;
+  margin-left: 2rem;
+  max-width: 75%;
+}
+
+.login-form {
+  margin: 0 auto;
+  max-width: 55rem;
+  background-color: #fff;
+  box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.06);
+  padding: 5rem 7rem;
+  border-radius: 5px;
+}
+
+.heading-secondary {
+  font-size: 2.25rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+  line-height: 1.3;
+  display: inline-block;
+  color: rgb(117, 167, 184);
+  margin-bottom: 1.5rem;
+}
+
+.form__group:not(:last-child) {
+  margin-bottom: 2.5rem;
+}
+
+.form__label {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.form__input {
+  display: block;
+  font-family: inherit;
+  font-size: 1.5rem;
+  color: inherit;
+  padding: 1.25rem 1.75rem;
+  border: none;
+  width: 100%;
+  background-color: #fff;
+  background-color: #f2f2f2;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.form__input:focus {
+  outline: none;
+  border-bottom: 3px solid #55c57a;
+}
+.form__input:focus:invalid {
+  border-bottom: 3px solid #ff7730;
+}
+
+.btn,
+.btn:link,
+.btn:visited {
+  font-size: 1.6rem;
+  padding: 1.4rem 3rem;
+  border-radius: 10rem;
+  text-transform: uppercase;
+  display: inline-block;
+  text-decoration: none;
+  transition: all 0.4s;
+  font-weight: 400;
+  backface-visibility: hidden;
+  border: none;
+  cursor: pointer;
+  background-color: rgb(117, 167, 184);
+}
+.btn:hover,
+.btn:link:hover,
+.btn:visited:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+}
+.btn:active,
+.btn:link:active,
+.btn:visited:active {
+  transform: translateY(-1px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }

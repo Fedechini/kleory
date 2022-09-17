@@ -7,7 +7,7 @@ block content
       each post in posts 
         .post
           .post__user 
-            img.post__user--photo(src=`images/users/${post.author.photo}`, alt="User photo")
+            img.post__user--photo(src=`/images/users/${post.author.photo}`, alt="User photo")
             .post__user--name
               p= post.author.name
               span= post.postedAgo
@@ -16,8 +16,12 @@ block content
             p.post__content--body= post.body
           .post__likes 
             p.post__likes--qty 0 likes 
-            a.post__comments--qty(href=`/posts/${post.id}`)= `${post.commentsQuantity} Comments`
+            a.post__comments--qty(href=`/post/${post.id}`)= `${post.commentsQuantity} Comments`
           .post__buttons 
-            button.post__btn Like
-            button.post__btn Comment
+            button.post__btn
+              img(src="/images/icons/like.svg", alt="like")
+              p Like
+            a(href=`/post/${post.id}`).post__btn
+                img(src="/images/icons/comment.svg", alt="comment")
+                p Comment
 

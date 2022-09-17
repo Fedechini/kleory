@@ -1,4 +1,36 @@
 extends base
 
 block content 
-  h1 this is the post page
+  .post-container
+        .post
+          .post__user 
+            img.post__user--photo(src=`/images/users/${post.author.photo}`, alt="User photo")
+            .post__user--name
+              p= post.author.name
+              span= post.postedAgo
+          .post__content 
+            h4.post__content--title= post.title
+            p.post__content--body= post.body
+          .post__likes 
+            p.post__likes--qty 0 likes 
+            p.post__comments--qty= `${post.commentsQuantity} Comments`
+
+
+          each comment in post.comments
+            .post__comment
+              .post__comment-user
+                img.post__comment-photo(src=`/images/users/${comment.user.photo}`, alt="User photo")
+                .post__comment-user-name
+                  p= comment.user.name
+                  span= comment.postedAgo
+              .post__comment-content 
+                p= comment.comment
+
+
+          .post__buttons 
+            button.post__btn
+              img(src="/images/icons/like.svg", alt="like")
+              p Like
+            button.post__btn
+                img(src="/images/icons/comment.svg", alt="comment")
+                p Comment
