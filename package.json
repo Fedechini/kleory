@@ -5,9 +5,12 @@
   "scripts": {
     "start": "nodemon server.js",
     "debug": "ndb server.js",
-    "sass": "sass --no-source-map --watch stylesheets/main.scss public/css/main.css"
+    "sass": "sass --no-source-map --watch stylesheets/main.scss public/css/main.css",
+    "watch:js": "parcel watch ./javascripts/index.js --out-dir ./public/js --out-file bundle.js"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -30,5 +33,8 @@
     "slugify": "^1.6.5",
     "validator": "^13.7.0",
     "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
   }
 }

@@ -71,6 +71,8 @@ exports.protect = catchAsync(async (req, res, next) => {
     req.headers.authorization.startsWith('Bearer')
   ) {
     token = req.headers.authorization.split(' ')[1];
+  } else if (req.cookies.jwt) {
+    token = req.cookies.jwt;
   }
 
   if (!token) {
@@ -100,6 +102,32 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   // store logged in user in req for easy future use
   req.user = user;
+  next();
+});
+
+// only for render pages - no errors
+exports.isLoggedIn = catchAsync(async (req, res, next) => {
+  if (req.cookies.jwt) {
+    token = req.cookies.jwt;
+
+    // verify token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    // check if user still exist
+    const user = await User.findById(decoded.id);
+    if (!user) {
+      return next();
+    }
+
+    // check if user changed password after token was issued
+    if (user.changedPasswordAfter(decoded.iat)) {
+      return next();
+    }
+
+    // user is logged in - store it in locals for pug to use
+    res.locals.user = user;
+    return next();
+  }
   next();
 });
 

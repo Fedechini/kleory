@@ -2,9 +2,16 @@ header.header
   img.header__logo( src="/images/logo.jpeg", alt="Kleory logo")
   nav.nav.nav--home
     a.nav__el(href='/') Home
-  nav.nav.nav--user  
-    //- a.nav__el(href='#')
-    //-   img(src="images/users/user.jpg", alt="User photo")
-    //-   span Federico
-    a(href="/login").nav__el Log in  
-    a(href="/signup").nav__el.nav__el--cta Sign up  
+
+  nav.nav.nav__user  
+    if user 
+      
+      a.nav__el(href='#')
+        img.post__user--photo(src=`/images/users/${user.photo}`, alt=`Photo of ${user.name}`)
+        span.nav__user--name= user.name.split(' ')[0]
+      a.nav__el(href='#')
+        img(src="/images/icons/log-out.svg", alt="log-out")
+    
+    else
+      a(href="/login").nav__el Log in  
+      a(href="/signup").nav__el.nav__el--cta Sign up  
