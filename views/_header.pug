@@ -9,7 +9,7 @@ header.header
       a.nav__el(href='#')
         img.post__user--photo(src=`/images/users/${user.photo}`, alt=`Photo of ${user.name}`)
         span.nav__user--name= user.name.split(' ')[0]
-      a.nav__el(href='#')
+      a.nav__el#logout-btn(href='#')
         img(src="/images/icons/log-out.svg", alt="log-out")
     
     else

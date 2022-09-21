@@ -63,6 +63,15 @@ exports.login = catchAsync(async (req, res, next) => {
   createSendToken(user, 200, res);
 });
 
+exports.logout = (req, res) => {
+  res.cookie('jwt', 'loggedout', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+
+  res.status(200).json({ status: 'succes' });
+};
+
 exports.protect = catchAsync(async (req, res, next) => {
   // get token and check if its there
   let token;
@@ -106,30 +115,35 @@ exports.protect = catchAsync(async (req, res, next) => {
 });
 
 // only for render pages - no errors
-exports.isLoggedIn = catchAsync(async (req, res, next) => {
-  if (req.cookies.jwt) {
-    token = req.cookies.jwt;
+exports.isLoggedIn = async (req, res, next) => {
+  try {
+    if (req.cookies.jwt) {
+      token = req.cookies.jwt;
 
-    // verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      // verify token
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // check if user still exist
-    const user = await User.findById(decoded.id);
-    if (!user) {
+      // check if user still exist
+      const user = await User.findById(decoded.id);
+      if (!user) {
+        return next();
+      }
+
+      // check if user changed password after token was issued
+      if (user.changedPasswordAfter(decoded.iat)) {
+        return next();
+      }
+
+      // user is logged in - store it in locals for pug to use
+      res.locals.user = user;
       return next();
     }
-
-    // check if user changed password after token was issued
-    if (user.changedPasswordAfter(decoded.iat)) {
-      return next();
-    }
-
-    // user is logged in - store it in locals for pug to use
-    res.locals.user = user;
+  } catch (err) {
     return next();
   }
+
   next();
-});
+};
 
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {

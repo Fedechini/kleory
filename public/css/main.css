@@ -267,6 +267,36 @@ body {
   border-bottom: 3px solid #ff7730;
 }
 
+.error {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 80rem;
+  text-align: center;
+}
+.error__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.error__emoji {
+  font-size: 3.75rem;
+  margin-left: 1rem;
+}
+.error__msg {
+  font-size: 2.5rem;
+  font-weight: 700;
+  max-width: 50rem;
+  margin: 0 auto;
+}
+
+.heading-secondary--error {
+  color: #eb4d4b;
+  font-size: 3.5rem;
+}
+
 .btn,
 .btn:link,
 .btn:visited {
