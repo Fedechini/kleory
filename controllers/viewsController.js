@@ -1,4 +1,5 @@
 const Post = require('../models/postModel');
+const User = require('../models/userModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
@@ -37,3 +38,9 @@ exports.getPost = catchAsync(async (req, res, next) => {
     post,
   });
 });
+
+exports.getProfile = (req, res) => {
+  res.status(200).render('profile', {
+    title: 'Your profile',
+  });
+};

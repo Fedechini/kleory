@@ -24,3 +24,51 @@
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   }
 }
+
+.btn--small,
+.btn--small:link,
+.btn--small:visited {
+  background-color: rgb(117, 167, 184);
+  color: black;
+  font-size: 1.4rem;
+  padding: 1.25rem 3rem;
+  border-radius: 10rem;
+  text-transform: uppercase;
+  position: relative;
+  transition: all 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 400;
+  border: none;
+
+  &:hover {
+    background-color: rgb(111, 179, 202);
+  }
+}
+
+.btn-text:link,
+.btn-text:visited {
+  color: black;
+  display: inline-block;
+  text-decoration: none;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 3px;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: rgb(197, 197, 197);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  }
+
+  &:focus {
+    outline: none;
+    outline: 3px solid lightblue;
+    outline-offset: 3px;
+  }
+}

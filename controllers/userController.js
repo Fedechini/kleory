@@ -37,7 +37,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   });
 
   res.status(200).json({
-    status: 'succes',
+    status: 'success',
     data: {
       user: updatedUser,
     },
@@ -56,7 +56,6 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
 exports.getUser = factory.getOne(User, [
   {
     path: 'posts',
-    select: 'title -author',
   },
   { path: 'friendReq', select: 'from -to' },
   { path: 'friends', select: 'name photo' },

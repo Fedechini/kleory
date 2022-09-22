@@ -53,7 +53,8 @@ postSchema.pre(/^find/, function (next) {
 });
 
 postSchema.virtual('postedAgo').get(function () {
-  return `${ms(Date.now() - this.createdAt)} ago`;
+  const time = ms(Date.now() - this.createdAt);
+  return `${time} ago`;
 });
 
 const Post = mongoose.model('Post', postSchema);

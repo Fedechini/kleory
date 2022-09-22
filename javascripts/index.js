@@ -1,9 +1,11 @@
 import '@babel/polyfill';
 import { login, logout } from './login';
+import { updateData } from './updateSettings';
 
 // DOM
-const loginForm = document.querySelector('.form');
+const loginForm = document.querySelector('.form--login');
 const logOutBtn = document.querySelector('#logout-btn');
+const userDataForm = document.querySelector('.form-user-data');
 
 // DELEGATION
 if (loginForm) {
@@ -16,3 +18,13 @@ if (loginForm) {
 }
 
 if (logOutBtn) logOutBtn.addEventListener('click', logout);
+
+if (userDataForm) {
+  userDataForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+
+    updateData(name, email);
+  });
+}
