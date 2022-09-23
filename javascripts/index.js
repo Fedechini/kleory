@@ -2,6 +2,7 @@ import '@babel/polyfill';
 import { login, logout } from './login';
 import { updateSettings } from './updateSettings';
 import { comment } from './comment';
+import { newPost } from './post';
 
 // DOM
 const loginForm = document.querySelector('.form--login');
@@ -9,6 +10,7 @@ const logOutBtn = document.querySelector('#logout-btn');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const commentPostForm = document.querySelector('.form-post-comment');
+const newPostForm = document.querySelector('.new__post-form');
 
 // DELEGATION
 if (loginForm) {
@@ -57,13 +59,28 @@ if (userPasswordForm) {
 }
 
 if (commentPostForm) {
+  // if comment btn click, focus on comment input
+  document.getElementById('comment-btn').addEventListener('click', () => {
+    document.getElementById('comment').focus();
+  });
+
   commentPostForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const postId = window.location.pathname.split('/')[2];
     const newComment = document.getElementById('comment').value;
 
-    console.log(postId);
     comment(newComment, postId);
+  });
+}
+
+if (newPostForm) {
+  newPostForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const title = document.querySelector('.new__post-title').value;
+    const body = document.querySelector('.new__post-body').value;
+
+    newPost(title, body);
   });
 }

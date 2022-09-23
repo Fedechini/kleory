@@ -2,6 +2,18 @@ extends base
 
 block content 
   main.main
+    .new__post-container
+      .new__post
+        h2.heading-secondary.new__post-heading=`What's on your mind, ${user.name.split(' ')[0]} ?`
+        form.form.new__post-form
+          .form__group
+            input.new__post-title.form__input(type='text',placeholder='Title', maxlength='100' ,required)
+          .form__group
+            input.new__post-body.form__input(type='text',placeholder='Body (optional)')
+          button.btn.btn--small.new__post-btn Post
+
+    .line &nbsp;
+
     .post-container
 
       each post in posts 

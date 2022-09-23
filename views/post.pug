@@ -16,8 +16,11 @@ block content
             p.post__comments--qty= `${post.commentsQuantity} Comments`
 
           form.form.form-post-comment
-            .form__group
-              input#comment.form__input(type='text', placeholder="Add a comment")
+            .form__group.form__group--comment
+              input#comment.form__input.form__input-comment(type='text', placeholder="Add a comment")
+              button.btn--send
+                img(src="/images/icons/send.svg", alt="add comment")
+
 
           each comment in post.comments
             .post__comment
@@ -33,7 +36,7 @@ block content
             button.post__btn
               img(src="/images/icons/like.svg", alt="like")
               p Like
-            button.post__btn
+            button.post__btn#comment-btn
                 img(src="/images/icons/comment.svg", alt="comment")
                 p Comment
 

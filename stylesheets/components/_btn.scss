@@ -72,3 +72,15 @@
     outline-offset: 3px;
   }
 }
+
+.btn--send {
+  background-color: transparent;
+  height: 100%;
+  border: none;
+  border-left: 1px solid grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+}

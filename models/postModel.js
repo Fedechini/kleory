@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const ms = require('ms');
 
-// TODO: commentsQuantity & implement likes & likesQuantity in comments and posts
+// TODO: implement likes & likesQuantity in posts
 
 const postSchema = new mongoose.Schema(
   {
@@ -14,7 +14,6 @@ const postSchema = new mongoose.Schema(
     body: {
       type: String,
       trim: true,
-      required: [true, 'Post must have a body'],
     },
     createdAt: {
       type: Date,

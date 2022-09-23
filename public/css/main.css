@@ -411,6 +411,18 @@ body {
   outline-offset: 3px;
 }
 
+.btn--send {
+  background-color: transparent;
+  height: 100%;
+  border: none;
+  border-left: 1px solid grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+}
+
 .alert {
   position: fixed;
   top: 0;
@@ -454,6 +466,9 @@ body {
 }
 .form__input:focus:invalid {
   border-bottom: 3px solid #ff7730;
+}
+.form__input-comment:focus, .form__input-comment:invalid {
+  border-bottom: none;
 }
 
 .form__label {
@@ -506,4 +521,44 @@ body {
 .form__upload:focus + label {
   outline: 3px solid lightblue;
   outline-offset: 3px;
+}
+
+.form__group--comment {
+  display: flex;
+  align-items: center;
+  background-color: #f2f2f2;
+}
+
+.new__post {
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+  background-color: rgb(160, 160, 160);
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.25);
+}
+.new__post-container {
+  max-width: 120rem;
+  margin: 0 auto;
+}
+.new__post-heading {
+  color: black;
+  font-size: 1.75rem;
+}
+.new__post-form {
+  width: 80%;
+  margin: 0 auto;
+}
+.new__post-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  padding: 0.75rem;
+}
+.new__post-body {
+  font-size: 1.4rem;
+  padding: 0.75rem;
+}
+.new__post-btn {
+  background-color: #f2f2f2;
 }
