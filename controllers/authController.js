@@ -69,7 +69,7 @@ exports.logout = (req, res) => {
     httpOnly: true,
   });
 
-  res.status(200).json({ status: 'succes' });
+  res.status(200).json({ status: 'success' });
 };
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -184,7 +184,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     });
 
     res.status(200).json({
-      status: 'succes',
+      status: 'success',
       message: 'Token sent to email!',
     });
   } catch (err) {

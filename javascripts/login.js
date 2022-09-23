@@ -12,7 +12,8 @@ export const login = async (email, password) => {
       },
     });
 
-    if (res.data.status === 'succes') {
+    if (res.data.status === 'success') {
+      3;
       showAlert('success', 'Logged in succesfully');
       window.setTimeout(() => {
         location.assign('/');
