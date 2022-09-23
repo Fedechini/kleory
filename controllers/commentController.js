@@ -9,7 +9,7 @@ exports.getAllComments = catchAsync(async (req, res, next) => {
   const comments = await Comment.find(filter);
 
   res.status(200).json({
-    status: 'succes',
+    status: 'success',
     results: comments.length,
     data: {
       comments,

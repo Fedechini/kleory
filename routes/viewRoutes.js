@@ -9,5 +9,6 @@ router.get('/login', viewsController.getLoginForm);
 router.get('/', authController.isLoggedIn, viewsController.getHome);
 router.get('/post/:id', authController.isLoggedIn, viewsController.getPost);
 router.get('/me', authController.protect, viewsController.getProfile);
+router.get('/my-posts', authController.protect, viewsController.getMyPosts);
 
 module.exports = router;

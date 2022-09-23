@@ -1,12 +1,14 @@
 import '@babel/polyfill';
 import { login, logout } from './login';
 import { updateSettings } from './updateSettings';
+import { comment } from './comment';
 
 // DOM
 const loginForm = document.querySelector('.form--login');
 const logOutBtn = document.querySelector('#logout-btn');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
+const commentPostForm = document.querySelector('.form-post-comment');
 
 // DELEGATION
 if (loginForm) {
@@ -51,5 +53,17 @@ if (userPasswordForm) {
     document.getElementById('password-current').value = '';
     document.getElementById('password-new').value = '';
     document.getElementById('password-confirm').value = '';
+  });
+}
+
+if (commentPostForm) {
+  commentPostForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const postId = window.location.pathname.split('/')[2];
+    const newComment = document.getElementById('comment').value;
+
+    console.log(postId);
+    comment(newComment, postId);
   });
 }

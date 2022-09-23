@@ -44,3 +44,12 @@ exports.getProfile = (req, res) => {
     title: 'Your profile',
   });
 };
+
+exports.getMyPosts = async (req, res, next) => {
+  const posts = await Post.find({ author: req.user.id }).sort('-createdAt');
+
+  res.status(200).render('home', {
+    title: 'My Posts',
+    posts,
+  });
+};
