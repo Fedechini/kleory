@@ -2,7 +2,7 @@ import '@babel/polyfill';
 import { login, logout } from './login';
 import { updateSettings } from './updateSettings';
 import { comment } from './comment';
-import { newPost } from './post';
+import { newPost, deletePost } from './post';
 
 // DOM
 const loginForm = document.querySelector('.form--login');
@@ -11,6 +11,7 @@ const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const commentPostForm = document.querySelector('.form-post-comment');
 const newPostForm = document.querySelector('.new__post-form');
+const deletePostBtn = document.getElementById('delete-post');
 
 // DELEGATION
 if (loginForm) {
@@ -82,5 +83,13 @@ if (newPostForm) {
     const body = document.querySelector('.new__post-body').value;
 
     newPost(title, body);
+  });
+}
+
+if (deletePostBtn) {
+  deletePostBtn.addEventListener('click', () => {
+    const postId = window.location.pathname.split('/')[2];
+
+    deletePost(postId);
   });
 }

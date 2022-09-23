@@ -8,6 +8,9 @@ block content
             .post__user--name
               p= post.author.name
               span= post.postedAgo
+            - if (post.author.id === user.id)
+                button#delete-post
+                  img(src="/images/icons/trash.svg", alt="delete post")
           .post__content 
             h4.post__content--title= post.title
             p.post__content--body= post.body

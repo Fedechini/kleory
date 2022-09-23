@@ -118,6 +118,7 @@ body {
   display: flex;
   align-items: center;
   gap: 1rem;
+  position: relative;
 }
 .post__user--photo {
   height: 5rem;
@@ -210,6 +211,14 @@ body {
   font-weight: 300;
   margin-left: 2rem;
   max-width: 75%;
+}
+
+#delete-post {
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+  position: absolute;
+  right: 1rem;
 }
 
 .login-form {

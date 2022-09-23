@@ -5,7 +5,7 @@ export const newPost = async (title, body) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: `http://127.0.0.1:3000/api/v1/posts`,
+      url: 'http://127.0.0.1:3000/api/v1/posts',
       data: {
         title,
         body,
@@ -16,7 +16,21 @@ export const newPost = async (title, body) => {
       showAlert('success', 'Post created successfully!');
     }
   } catch (err) {
-    console.log(err);
+    showAlert('error', err.response.data.message);
+  }
+};
+
+export const deletePost = async (id) => {
+  try {
+    const res = await axios({
+      method: 'DELETE',
+      url: `http://127.0.0.1:3000/api/v1/posts/${id}`,
+    });
+
+    if (res.status === 204) {
+      showAlert('success', 'Post deleted successfully!');
+    }
+  } catch (err) {
     showAlert('error', err.response.data.message);
   }
 };
