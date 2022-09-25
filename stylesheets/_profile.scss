@@ -91,6 +91,7 @@
   align-items: center;
   padding: 2rem 3rem;
   border-radius: 1rem;
+  margin-bottom: 5rem;
 
   &-left {
     display: flex;
@@ -112,7 +113,8 @@
   }
 }
 
-.add-friends {
+.add-friends,
+.remove-friends {
   border: none;
   border-radius: 5px;
   background-color: white;

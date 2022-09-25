@@ -62,3 +62,14 @@ exports.getProfile = async (req, res, next) => {
     profile,
   });
 };
+
+exports.getMyFriends = async (req, res, next) => {
+  const user = await User.findById(req.user.id).populate('friendReq');
+
+  console.log(user);
+
+  res.status(200).render('friends', {
+    title: 'My Friends',
+    user,
+  });
+};

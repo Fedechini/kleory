@@ -13,8 +13,8 @@ block content
           button.add-friends
             img(src="/images/icons/add-friend.svg", alt="add as friend")
         - if(user.friends.includes(profile.id) && user.id !== profile.id)
-          button.add-friends
-            img(src="/images/icons/are-friend.svg", alt="add as friend")
+          button.remove-friends
+            img(src="/images/icons/user-x.svg", alt="delete friend")
 
     .post-container
       each post in profile.posts 

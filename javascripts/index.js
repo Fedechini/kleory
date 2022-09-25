@@ -3,6 +3,7 @@ import { login, logout } from './login';
 import { updateSettings } from './updateSettings';
 import { comment } from './comment';
 import { newPost, deletePost } from './post';
+import { sendReq, acceptReq } from './friend';
 
 // DOM
 const loginForm = document.querySelector('.form--login');
@@ -12,6 +13,8 @@ const userPasswordForm = document.querySelector('.form-user-password');
 const commentPostForm = document.querySelector('.form-post-comment');
 const newPostForm = document.querySelector('.new__post-form');
 const deletePostBtn = document.getElementById('delete-post');
+const sendReqBtn = document.querySelector('.add-friends');
+const acceptReqBtn = document.getElementById('accept-req');
 
 // DELEGATION
 if (loginForm) {
@@ -91,5 +94,23 @@ if (deletePostBtn) {
     const postId = window.location.pathname.split('/')[2];
 
     deletePost(postId);
+  });
+}
+
+if (sendReqBtn) {
+  sendReqBtn.addEventListener('click', () => {
+    const userId = window.location.pathname.split('/')[2];
+
+    sendReq(userId);
+  });
+}
+
+if (acceptReqBtn) {
+  acceptReqBtn.addEventListener('click', (e) => {
+    const { reqId } = e.target.dataset;
+
+    console.log(reqId);
+
+    acceptReq(reqId);
   });
 }

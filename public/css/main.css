@@ -351,6 +351,7 @@ body {
   align-items: center;
   padding: 2rem 3rem;
   border-radius: 1rem;
+  margin-bottom: 5rem;
 }
 .user__profile-left {
   display: flex;
@@ -368,7 +369,8 @@ body {
   font-size: 1.5rem;
 }
 
-.add-friends {
+.add-friends,
+.remove-friends {
   border: none;
   border-radius: 5px;
   background-color: white;
@@ -380,6 +382,73 @@ body {
   font-size: 3rem;
   text-align: center;
   margin-top: 8rem;
+}
+
+.friends {
+  background-color: grey;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 5rem 8rem;
+  font-size: 2rem;
+  border-radius: 5px;
+}
+.friends-accept, .friends-reject {
+  background-color: rgba(0, 180, 0, 0.75);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+}
+.friends-accept:hover, .friends-reject:hover {
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+.friends-accept:active, .friends-reject:active {
+  transform: translateY(0);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+.friends-accept:focus, .friends-reject:focus {
+  outline: none;
+  outline-offset: 3px;
+}
+.friends-reject {
+  background-color: rgba(225, 0, 0, 0.75);
+}
+
+.friends__list {
+  list-style: none;
+}
+.friends__list-req {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.75rem 0;
+}
+.friends__list-options {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.heading-tertiary {
+  text-transform: uppercase;
+  text-decoration: underline;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+  line-height: 1.3;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+.friends__list-accepted {
+  list-style: none;
+  display: flex;
+  gap: 0.5rem;
 }
 
 .btn,

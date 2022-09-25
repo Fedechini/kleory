@@ -32,7 +32,7 @@ exports.acceptFriend = catchAsync(async (req, res, next) => {
   await req.user.save({ validateBeforeSave: false });
 
   res.status(200).json({
-    status: 'succes',
+    status: 'success',
   });
 });
 

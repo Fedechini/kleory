@@ -4,7 +4,8 @@ block content
   .post-container
         .post
           .post__user 
-            img.post__user--photo(src=`/images/users/${post.author.photo}`, alt="User photo")
+            a(href=`/user/${post.author.id}`)
+              img.post__user--photo(src=`/images/users/${post.author.photo}`, alt="User photo")
             .post__user--name
               p= post.author.name
               span= post.postedAgo
