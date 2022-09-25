@@ -39,9 +39,9 @@ exports.getPost = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getProfile = (req, res) => {
-  res.status(200).render('profile', {
-    title: 'Your profile',
+exports.getMe = (req, res) => {
+  res.status(200).render('me', {
+    title: 'My profile',
   });
 };
 
@@ -51,5 +51,14 @@ exports.getMyPosts = async (req, res, next) => {
   res.status(200).render('home', {
     title: 'My Posts',
     posts,
+  });
+};
+
+exports.getProfile = async (req, res, next) => {
+  const profile = await User.findById(req.params.userId).populate('posts');
+
+  res.status(200).render('profile', {
+    title: `${profile.name.split(' ')[0]}'s Profile`,
+    profile,
   });
 };

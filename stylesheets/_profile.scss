@@ -81,3 +81,47 @@
   height: 1px;
   background-color: #e0e0e0;
 }
+
+.user__profile {
+  background-color: rgb(146, 146, 146);
+  max-width: 120rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 3rem;
+  border-radius: 1rem;
+
+  &-left {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  &-photo {
+    border-radius: 5px;
+    max-height: 128px;
+  }
+
+  &-data {
+    font-size: 1.9rem;
+
+    & > p {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.add-friends {
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.no-posts-message {
+  font-size: 3rem;
+  text-align: center;
+  margin-top: 8rem;
+}

@@ -1,0 +1,71 @@
+extends base
+
+block content
+  main.main
+    .user-view
+      nav.user-view__menu
+        ul.side-nav
+          li
+            a(href='/me')
+              img.side-nav__icon(src="/images/icons/settings.svg", alt="settings")
+              | Settings
+          li
+            a(href='/my-posts')
+              img.side-nav__icon(src="/images/icons/list.svg", alt="my posts")
+              | My posts
+          li
+            a(href='#')
+              img.side-nav__icon(src="/images/icons/friends.svg", alt="friends")
+              | Friends
+
+
+        - if (user.role === 'admin')
+          .admin-nav
+            h5.admin-nav__heading Admin
+            ul.side-nav
+              li
+                a(href='#')
+                  img.side-nav__icon(src="/images/icons/post.svg", alt="manage posts")
+                  | Manage posts
+              li
+                a(href='#')
+                  img.side-nav__icon(src="/images/icons/user.svg", alt="manage users")
+                  | Manage users
+              li
+                a(href='#')
+                  img.side-nav__icon(src="/images/icons/comment.svg", alt="manage comments")
+                  | Manage comments
+
+      .user-view__content
+        .user-view__form-container
+          h2.heading-secondary Your account settings
+          form.form.form-user-data
+            .form__group
+              label.form__label(for='name') Name
+              input#name.form__input(type='text', value=`${user.name}`, required)
+            .form__group
+              label.form__label(for='email') Email address
+              input#email.form__input(type='email', value=`${user.email}`, required)
+            .form__group.form__photo-upload
+              img.form__user-photo(src=`/images/users/${user.photo}`, alt='User photo')
+              input.form__upload(type="file", accept='image/*', id="photo", name="photo")
+              label.form__label(for="photo") Choose new photo
+            .form__group.right
+              button.btn.btn--small Save settings
+
+        .line &nbsp;
+
+        .user-view__form-container
+          h2.heading-secondary Password change
+          form.form.form-user-password
+            .form__group
+              label.form__label(for='password-current') Current password
+              input#password-current.form__input(type='password', placeholder='••••••••', required, minlength='8')
+            .form__group
+              label.form__label(for='password') New password
+              input#password-new.form__input(type='password', placeholder='••••••••', required, minlength='8')
+            .form__group.ma-bt-lg
+              label.form__label(for='password-confirm') Confirm password
+              input#password-confirm.form__input(type='password', placeholder='••••••••', required, minlength='8')
+            .form__group.right
+              button.btn.btn--small.btn--save--password Save password

@@ -28,7 +28,8 @@ block content
           each comment in post.comments
             .post__comment
               .post__comment-user
-                img.post__comment-photo(src=`/images/users/${comment.user.photo}`, alt="User photo")
+                a(href=`/user/${comment.user.id}`)
+                  img.post__comment-photo(src=`/images/users/${comment.user.photo}`, alt="User photo")
                 .post__comment-user-name
                   p= comment.user.name
                   span= comment.postedAgo

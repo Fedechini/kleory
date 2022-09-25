@@ -72,7 +72,8 @@ commentSchema.post('findOneAndDelete', async function (doc) {
 });
 
 commentSchema.virtual('postedAgo').get(function () {
-  return `${ms(Date.now() - this.createdAt)} ago`;
+  const time = ms(Date.now() - this.createdAt);
+  return `${time} ago`;
 });
 
 const Comment = mongoose.model('Comment', commentSchema);
