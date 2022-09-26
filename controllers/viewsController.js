@@ -64,7 +64,9 @@ exports.getProfile = async (req, res, next) => {
 };
 
 exports.getMyFriends = async (req, res, next) => {
-  const user = await User.findById(req.user.id).populate('friendReq');
+  const user = await User.findById(req.user.id)
+    .populate('friendReq')
+    .populate({ path: 'friends', select: 'name photo' });
 
   console.log(user);
 

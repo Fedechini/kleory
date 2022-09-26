@@ -1,9 +1,9 @@
 import '@babel/polyfill';
 import { login, logout } from './login';
 import { updateSettings } from './updateSettings';
-import { comment } from './comment';
+import { comment, deleteComment } from './comment';
 import { newPost, deletePost } from './post';
-import { sendReq, acceptReq } from './friend';
+import { sendReq, acceptReq, rejectReq, deleteFriend } from './friend';
 
 // DOM
 const loginForm = document.querySelector('.form--login');
@@ -11,10 +11,13 @@ const logOutBtn = document.querySelector('#logout-btn');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const commentPostForm = document.querySelector('.form-post-comment');
+const deleteCommentBtn = document.querySelectorAll('.delete-comment');
 const newPostForm = document.querySelector('.new__post-form');
 const deletePostBtn = document.getElementById('delete-post');
 const sendReqBtn = document.querySelector('.add-friends');
 const acceptReqBtn = document.getElementById('accept-req');
+const rejectReqBtn = document.getElementById('reject-req');
+const deleteFriendBtn = document.querySelector('.remove-friends');
 
 // DELEGATION
 if (loginForm) {
@@ -78,6 +81,16 @@ if (commentPostForm) {
   });
 }
 
+if (deleteCommentBtn) {
+  deleteCommentBtn.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const { commentId } = e.target.dataset;
+
+      deleteComment(commentId);
+    });
+  });
+}
+
 if (newPostForm) {
   newPostForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -109,8 +122,22 @@ if (acceptReqBtn) {
   acceptReqBtn.addEventListener('click', (e) => {
     const { reqId } = e.target.dataset;
 
-    console.log(reqId);
-
     acceptReq(reqId);
+  });
+}
+
+if (rejectReqBtn) {
+  rejectReqBtn.addEventListener('click', (e) => {
+    const { reqId } = e.target.dataset;
+
+    rejectReq(reqId);
+  });
+}
+
+if (deleteFriendBtn) {
+  deleteFriendBtn.addEventListener('click', () => {
+    const friendId = window.location.pathname.split('/')[2];
+
+    deleteFriend(friendId);
   });
 }

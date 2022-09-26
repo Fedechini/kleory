@@ -18,3 +18,18 @@ export const comment = async (comment, postId) => {
     showAlert('error', err.response.data.message);
   }
 };
+
+export const deleteComment = async (commentId) => {
+  try {
+    const res = await axios({
+      method: 'DELETE',
+      url: `http://127.0.0.1:3000/api/v1/comments/${commentId}`,
+    });
+
+    if (res.status === 204) {
+      showAlert('success', 'Comment deleted successfully!');
+    }
+  } catch (err) {
+    showAlert('error', err.response.data.message);
+  }
+};

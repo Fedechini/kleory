@@ -21,7 +21,6 @@ html {
 }
 
 body {
-  background-color: var(--color-primary-background);
   font-family: "Roboto", sans-serif;
 }
 
@@ -211,6 +210,7 @@ body {
   font-weight: 300;
   margin-left: 2rem;
   max-width: 75%;
+  flex: 1;
 }
 
 #delete-post {
@@ -219,6 +219,12 @@ body {
   cursor: pointer;
   position: absolute;
   right: 1rem;
+}
+
+.delete-comment {
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
 }
 
 .login-form {

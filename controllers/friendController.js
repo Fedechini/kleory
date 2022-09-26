@@ -89,7 +89,7 @@ exports.deleteFriend = catchAsync(async (req, res, next) => {
   });
 
   res.status(204).json({
-    status: 'succes',
+    status: 'success',
     data: null,
   });
 });

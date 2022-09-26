@@ -4,24 +4,23 @@ block content
   main.main 
    .friends
    
-    h3.heading-tertiary Your friend list:
+    h3.heading-tertiary Your friends list:
     ul.friends__list-accepted
-      each request in user.friendReq 
-        -if(request.status === 'accepted')
+      each friend in user.friends
           li.friends__list-friends
-            a(href=`/user/${request.from.id}`)
-              img.post__user--photo(src=`/images/users/${request.from.photo}`, alt=`${request.from.name}  Photo`)
+            a(href=`/user/${friend.id}`)
+              img.post__user--photo(src=`/images/users/${friend.photo}`, alt=`${friend.name}  Photo`)
 
     .line &nbsp;
 
-    h3.heading-tertiary Your friend requests:
+    h3.heading-tertiary Your friends requests:
     ul.friends__list 
       each request in user.friendReq
-        -if(request.status !== 'accepted')
+        -if(request.status === 'sent')
           li.friends__list-req
             a(href=`/user/${request.from.id}`)
               img.post__user--photo(src=`/images/users/${request.from.photo}`, alt=`${request.from.name} Photo`)
             h4= `${request.from.name} sent you a friend request`
             .friends__list-options
               button.friends-accept#accept-req(data-req-id=`${request.id}`) ✔️
-              button.friends-reject#reject-req ╳
+              button.friends-reject#reject-req(data-req-id=`${request.id}`) ╳

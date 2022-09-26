@@ -34,8 +34,11 @@ block content
                 .post__comment-user-name
                   p= comment.user.name
                   span= comment.postedAgo
-              .post__comment-content 
+              .post__comment-content
                 p= comment.comment
+              - if(user.id === comment.user.id)
+                button.delete-comment(data-comment-id=`${comment.id}`) ❌
+
 
           .post__buttons 
             button.post__btn

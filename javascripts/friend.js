@@ -33,3 +33,33 @@ export const acceptReq = async (reqId) => {
     showAlert('error', err.response.data.message);
   }
 };
+
+export const rejectReq = async (reqId) => {
+  try {
+    const res = await axios({
+      method: 'DELETE',
+      url: `http://127.0.0.1:3000/api/v1/friends/rejectFriend/${reqId}`,
+    });
+
+    if (res.status === 204) {
+      showAlert('success', 'Request rejected successfully!');
+    }
+  } catch (err) {
+    showAlert('error', err.response.data.message);
+  }
+};
+
+export const deleteFriend = async (friendId) => {
+  try {
+    const res = await axios({
+      method: 'DELETE',
+      url: `http://127.0.0.1:3000/api/v1/friends/deleteFriend/${friendId}`,
+    });
+
+    if (res.status === 204) {
+      showAlert('success', 'Friend deleted successfully!');
+    }
+  } catch (err) {
+    showAlert('error', err.response.data.message);
+  }
+};
