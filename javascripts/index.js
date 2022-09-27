@@ -1,5 +1,5 @@
 import '@babel/polyfill';
-import { login, logout } from './login';
+import { loginSignup, logout } from './login';
 import { updateSettings } from './updateSettings';
 import { comment, deleteComment } from './comment';
 import { newPost, deletePost } from './post';
@@ -7,6 +7,7 @@ import { sendReq, acceptReq, rejectReq, deleteFriend } from './friend';
 
 // DOM
 const loginForm = document.querySelector('.form--login');
+const signupForm = document.querySelector('.form--signup');
 const logOutBtn = document.querySelector('#logout-btn');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
@@ -25,7 +26,23 @@ if (loginForm) {
     e.preventDefault();
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    login(email, password);
+
+    loginSignup({ email, password }, 'login');
+  });
+}
+
+if (signupForm) {
+  signupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('new-name').value;
+    const email = document.getElementById('new-email').value;
+    const password = document.getElementById('new-password').value;
+    const passwordConfirm = document.getElementById(
+      'new-passwordConfirm'
+    ).value;
+
+    loginSignup({ name, email, password, passwordConfirm }, 'signup');
   });
 }
 

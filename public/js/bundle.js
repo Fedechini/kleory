@@ -11118,7 +11118,7 @@ exports.showAlert = showAlert;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.logout = exports.login = void 0;
+exports.logout = exports.loginSignup = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -11134,57 +11134,55 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var login = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(email, password) {
-    var res;
+// action = 'login' || 'signup'
+var loginSignup = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(data, action) {
+    var url, res;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-            _context.next = 3;
+            url = action === 'login' ? 'http://127.0.0.1:3000/api/v1/users/login' : 'http://127.0.0.1:3000/api/v1/users/signup';
+            _context.next = 4;
             return (0, _axios.default)({
-              method: 'post',
-              url: 'http://127.0.0.1:3000/api/v1/users/login',
-              data: {
-                email: email,
-                password: password
-              }
+              method: 'POST',
+              url: url,
+              data: data
             });
 
-          case 3:
+          case 4:
             res = _context.sent;
 
             if (res.data.status === 'success') {
-              3;
-              (0, _alerts.showAlert)('success', 'Logged in succesfully');
+              (0, _alerts.showAlert)('success', "".concat(action.toUpperCase(), " succesfull"));
               window.setTimeout(function () {
                 location.assign('/');
               }, 1500);
             }
 
-            _context.next = 10;
+            _context.next = 11;
             break;
 
-          case 7:
-            _context.prev = 7;
+          case 8:
+            _context.prev = 8;
             _context.t0 = _context["catch"](0);
             (0, _alerts.showAlert)('error', _context.t0.response.data.message);
 
-          case 10:
+          case 11:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 7]]);
+    }, _callee, null, [[0, 8]]);
   }));
 
-  return function login(_x, _x2) {
+  return function loginSignup(_x, _x2) {
     return _ref.apply(this, arguments);
   };
 }();
 
-exports.login = login;
+exports.loginSignup = loginSignup;
 
 var logout = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
@@ -12005,6 +12003,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 // DOM
 var loginForm = document.querySelector('.form--login');
+var signupForm = document.querySelector('.form--signup');
 var logOutBtn = document.querySelector('#logout-btn');
 var userDataForm = document.querySelector('.form-user-data');
 var userPasswordForm = document.querySelector('.form-user-password');
@@ -12022,7 +12021,26 @@ if (loginForm) {
     e.preventDefault();
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
-    (0, _login.login)(email, password);
+    (0, _login.loginSignup)({
+      email: email,
+      password: password
+    }, 'login');
+  });
+}
+
+if (signupForm) {
+  signupForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = document.getElementById('new-name').value;
+    var email = document.getElementById('new-email').value;
+    var password = document.getElementById('new-password').value;
+    var passwordConfirm = document.getElementById('new-passwordConfirm').value;
+    (0, _login.loginSignup)({
+      name: name,
+      email: email,
+      password: password,
+      passwordConfirm: passwordConfirm
+    }, 'signup');
   });
 }
 

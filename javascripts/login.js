@@ -1,20 +1,22 @@
 import axios from 'axios';
 import { showAlert } from './alerts';
 
-export const login = async (email, password) => {
+// action = 'login' || 'signup'
+export const loginSignup = async (data, action) => {
   try {
+    const url =
+      action === 'login'
+        ? 'http://127.0.0.1:3000/api/v1/users/login'
+        : 'http://127.0.0.1:3000/api/v1/users/signup';
+
     const res = await axios({
-      method: 'post',
-      url: 'http://127.0.0.1:3000/api/v1/users/login',
-      data: {
-        email,
-        password,
-      },
+      method: 'POST',
+      url,
+      data,
     });
 
     if (res.data.status === 'success') {
-      3;
-      showAlert('success', 'Logged in succesfully');
+      showAlert('success', `${action.toUpperCase()} succesfull`);
       window.setTimeout(() => {
         location.assign('/');
       }, 1500);

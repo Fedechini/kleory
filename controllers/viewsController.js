@@ -15,6 +15,18 @@ exports.getLoginForm = (req, res) => {
     });
 };
 
+exports.getSignupForm = (req, res) => {
+  res
+    .status(200)
+    .set(
+      'Content-Security-Policy',
+      "connect-src 'self' https://cdnjs.cloudflare.com"
+    )
+    .render('signup', {
+      title: 'Create an account',
+    });
+};
+
 exports.getHome = catchAsync(async (req, res, next) => {
   if (!res.locals.user) return this.getLoginForm(req, res);
 
