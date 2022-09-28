@@ -4,10 +4,13 @@ import { updateSettings } from './updateSettings';
 import { comment, deleteComment } from './comment';
 import { newPost, deletePost } from './post';
 import { sendReq, acceptReq, rejectReq, deleteFriend } from './friend';
+import { forgotPassword, resetPassword } from './forgotPassword';
 
 // DOM
 const loginForm = document.querySelector('.form--login');
 const signupForm = document.querySelector('.form--signup');
+const forgotPasswordForm = document.querySelector('.form--password');
+const resetPasswordForm = document.querySelector('.form-reset-password');
 const logOutBtn = document.querySelector('#logout-btn');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
@@ -43,6 +46,32 @@ if (signupForm) {
     ).value;
 
     loginSignup({ name, email, password, passwordConfirm }, 'signup');
+  });
+}
+
+if (forgotPasswordForm) {
+  forgotPasswordForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value;
+
+    await forgotPassword(email);
+
+    document.getElementById('email').value = '';
+  });
+}
+
+if (resetPasswordForm) {
+  resetPasswordForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const password = document.getElementById('reset-password').value;
+    const passwordConfirm = document.getElementById(
+      'reset-passwordConfirm'
+    ).value;
+    const token = window.location.pathname.split('/')[2];
+
+    resetPassword(password, passwordConfirm, token);
   });
 }
 

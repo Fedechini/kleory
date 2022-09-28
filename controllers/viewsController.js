@@ -27,6 +27,30 @@ exports.getSignupForm = (req, res) => {
     });
 };
 
+exports.getForgotPasswordForm = (req, res) => {
+  res
+    .status(200)
+    .set(
+      'Content-Security-Policy',
+      "connect-src 'self' https://cdnjs.cloudflare.com"
+    )
+    .render('passwordForgot', {
+      title: 'Forgot my password',
+    });
+};
+
+exports.getPasswordResetForm = (req, res) => {
+  res
+    .status(200)
+    .set(
+      'Content-Security-Policy',
+      "connect-src 'self' https://cdnjs.cloudflare.com"
+    )
+    .render('passwordReset', {
+      title: 'Reset my password',
+    });
+};
+
 exports.getHome = catchAsync(async (req, res, next) => {
   if (!res.locals.user) return this.getLoginForm(req, res);
 

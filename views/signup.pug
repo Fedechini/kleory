@@ -17,5 +17,6 @@ block content
         .form__group
           label.form__label(for='passwordConfirm') Confirm Password
           input#new-passwordConfirm.form__input(type='password', placeholder='••••••••', required, minlength='8')
-        .form__group
-          button.btn.btn--green Sign up
+        .form__group.have-account
+          button.btn Sign up
+          a.have-account-link(href="/login") Already have an account? Login

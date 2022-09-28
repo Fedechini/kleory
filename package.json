@@ -33,6 +33,7 @@
     "nodemon": "^2.0.19",
     "pug": "^3.0.2",
     "sass": "^1.54.9",
+    "serve-favicon": "^2.5.0",
     "sharp": "^0.31.0",
     "slugify": "^1.6.5",
     "validator": "^13.7.0",

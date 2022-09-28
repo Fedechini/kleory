@@ -1,5 +1,7 @@
 .login-form,
-.signup-form {
+.signup-form,
+.forgot-password-form,
+.reset-password-form {
   margin: 0 auto;
   max-width: 55rem;
   background-color: #fff;
@@ -17,4 +19,18 @@
   display: inline-block;
   color: rgb(117, 167, 184);
   margin-bottom: 1.5rem;
+}
+
+.forgot-password,
+.have-account {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &-link,
+  &-link:link,
+  &-link:visited {
+    font-size: 1.25rem;
+    color: black;
+  }
 }
