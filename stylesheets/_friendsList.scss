@@ -7,6 +7,14 @@
   border-radius: 5px;
   border: 1px solid var(--color-border);
 
+  @include respond(tab-port) {
+    padding: 3rem 6rem;
+  }
+
+  @include respond(phone) {
+    padding: 1rem 3rem;
+  }
+
   &-accept,
   &-reject {
     background-color: rgba(0, 180, 0, 0.75);
@@ -42,6 +50,8 @@
 
 .friends__list {
   list-style: none;
+  display: flex;
+  flex-wrap: wrap;
 
   &-req {
     color: var(--color-white-2);
@@ -49,6 +59,14 @@
     justify-content: space-between;
     align-items: center;
     margin: 1.75rem 0;
+
+    @include respond(tab-port) {
+      font-size: 1.75rem;
+    }
+
+    @include respond(tab-port) {
+      font-size: 1.5rem;
+    }
   }
 
   &-options {

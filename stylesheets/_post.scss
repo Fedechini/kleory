@@ -2,13 +2,17 @@
   background-color: var(--color-dark-1);
   padding: 4rem 3rem;
   min-height: 92vh;
+
+  @include respond(tab-land) {
+    padding: 3rem 1rem;
+  }
 }
 
 .post {
-  width: 60%;
+  width: 70%;
   border-radius: 5px;
   border: 1px solid var(--color-border);
-  background-color: var(--color-dark-2);
+  background-color: var(--color-dark-3);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -16,6 +20,18 @@
   font-size: 1.6rem;
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.25);
   margin-bottom: 5rem;
+
+  @include respond(tab-land) {
+    width: 75%;
+  }
+
+  @include respond(tab-port) {
+    width: 80%;
+  }
+
+  @include respond(phone) {
+    width: 95%;
+  }
 
   &-container {
     margin: 0 auto;
@@ -26,7 +42,7 @@
   }
 
   &__user {
-    background-color: var(--color-dark-3);
+    background-color: var(--color-dark-2);
     font-weight: 500;
     padding: 0.7rem;
     display: flex;
@@ -89,7 +105,7 @@
   &__btn,
   &__btn:link,
   &__btn:visited {
-    background-color: var(--color-dark-3);
+    background-color: var(--color-dark-2);
     width: 100%;
     padding: 0.6rem;
     text-transform: uppercase;
@@ -122,13 +138,22 @@
     &-photo {
       height: 4.5rem;
       border-radius: 50%;
+
+      @include respond(tab-land) {
+        height: 3rem;
+      }
+
+      @include respond(phone) {
+        height: 4.5rem;
+      }
     }
 
     &-user {
       display: flex;
-      margin: 0 0.75rem;
+      margin: 0 1rem;
       gap: 1.25rem;
       color: var(--color-white-2);
+      width: 15%;
 
       &-name {
         display: flex;
@@ -136,10 +161,22 @@
         font-weight: 400;
         max-width: min-content;
 
+        @include respond(tab-land) {
+          font-size: 1.3rem;
+        }
+
+        @include respond(phone) {
+          font-size: 1.5rem;
+        }
+
         & > span {
           font-size: 1.3rem;
           margin-top: 0.5rem;
           font-weight: 300;
+
+          @include respond(tab-land) {
+            font-size: 1rem;
+          }
         }
       }
     }
@@ -150,6 +187,19 @@
       max-width: 75%;
       flex: 1;
       color: var(--color-white-2);
+
+      @include respond(tab-land) {
+        font-size: 1.3rem;
+      }
+
+      @include respond(tab-port) {
+        max-width: 65%;
+        font-size: 1.5rem;
+      }
+
+      @include respond(phone) {
+        max-width: 55%;
+      }
     }
   }
 }

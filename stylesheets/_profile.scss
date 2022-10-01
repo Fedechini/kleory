@@ -9,10 +9,28 @@
   box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.07);
   display: flex;
 
+  @include respond(phone) {
+    flex-direction: column;
+  }
+
   &__menu {
     flex: 32rem 0 0;
     background-color: var(--color-dark-2);
     padding: 4rem 0;
+
+    @include respond(tab-land) {
+      flex: 28rem 0 0;
+      padding: 3rem 0;
+    }
+
+    @include respond(tab-port) {
+      flex: 20rem 0 0;
+      padding: 2rem 0;
+    }
+
+    @include respond(phone) {
+      padding: 1rem;
+    }
   }
 
   &__content {
@@ -24,6 +42,10 @@
     max-width: 68rem;
     margin: 0 auto;
     padding: 0 8rem;
+
+    @include respond(phone) {
+      padding: 0 3rem;
+    }
   }
 }
 
@@ -34,6 +56,10 @@
     margin: 1rem 0;
     border-left: 0 solid var(--color-dark-3);
     transition: all 0.3s;
+
+    @include respond(phone) {
+      margin: 0.5rem;
+    }
 
     &:hover {
       border-left: 4px solid var(--color-dark-3) !important;
@@ -50,6 +76,16 @@
       font-weight: 400;
       text-decoration: none;
       transition: all 0.3s;
+
+      @include respond(tab-port) {
+        padding: 1rem 1.5rem;
+        font-size: 1.25rem;
+      }
+
+      @include respond(phone) {
+        padding: 0.5rem;
+        font-size: 1.5rem;
+      }
     }
 
     & > a:hover,
@@ -65,6 +101,10 @@
 
 .admin-nav {
   margin-top: 5.5rem;
+
+  @include respond(phone) {
+    margin-top: 2rem;
+  }
 
   &__heading {
     margin: 0 5rem 1.5rem 4rem;
@@ -95,6 +135,10 @@
   border-radius: 1rem;
   margin-bottom: 5rem;
 
+  @include respond(phone) {
+    padding: 0.75rem 1rem;
+  }
+
   &-left {
     display: flex;
     align-items: center;
@@ -104,15 +148,27 @@
   &-photo {
     border-radius: 5px;
     max-height: 128px;
+
+    @include respond(phone) {
+      max-height: 8rem;
+    }
   }
 
   &-data {
     color: var(--color-white-1);
     font-size: 1.9rem;
 
+    @include respond(phone) {
+      font-size: 1.5rem;
+    }
+
     & > p {
       color: var(--color-white-2);
       font-size: 1.5rem;
+
+      @include respond(phone) {
+        font-size: 1rem;
+      }
     }
   }
 }

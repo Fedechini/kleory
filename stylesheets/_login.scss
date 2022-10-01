@@ -9,6 +9,10 @@
   padding: 5rem 7rem;
   border-radius: 5px;
   border: 1px solid var(--color-border);
+
+  @include respond(phone) {
+    padding: 2rem 3rem;
+  }
 }
 
 .heading-secondary {
@@ -33,5 +37,9 @@
   &-link:visited {
     font-size: 1.25rem;
     color: var(--color-white-1);
+  }
+
+  @include respond(phone) {
+    gap: 1.75rem;
   }
 }
