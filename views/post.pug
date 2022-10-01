@@ -1,50 +1,51 @@
 extends base
 
 block content 
-  .post-container
-        .post
-          .post__user 
-            a(href=`/user/${post.author.id}`)
-              img.post__user--photo(src=`/images/users/${post.author.photo}`, alt="User photo")
-            .post__user--name
-              p= post.author.name
-              span= post.postedAgo
-            - if (post.author.id === user.id)
-                button#delete-post
-                  img(src="/images/icons/trash.svg", alt="delete post")
-          .post__content 
-            h4.post__content--title= post.title
-            p.post__content--body= post.body
-          .post__likes 
-            p.post__likes--qty 0 likes 
-            p.post__comments--qty= `${post.commentsQuantity} Comments`
+  main.main
+    .post-container
+          .post
+            .post__user 
+              a(href=`/user/${post.author.id}`)
+                img.post__user--photo(src=`/images/users/${post.author.photo}`, alt="User photo")
+              .post__user--name
+                p= post.author.name
+                span= post.postedAgo
+              - if (post.author.id === user.id)
+                  button#delete-post
+                    img(src="/images/icons/trash.svg", alt="delete post")
+            .post__content 
+              h4.post__content--title= post.title
+              p.post__content--body= post.body
+            .post__likes 
+              p.post__likes--qty 0 likes 
+              p.post__comments--qty= `${post.commentsQuantity} Comments`
 
-          form.form.form-post-comment
-            .form__group.form__group--comment
-              input#comment.form__input.form__input-comment(type='text', placeholder="Add a comment")
-              button.btn--send
-                img(src="/images/icons/send.svg", alt="add comment")
-
-
-          each comment in post.comments
-            .post__comment
-              .post__comment-user
-                a(href=`/user/${comment.user.id}`)
-                  img.post__comment-photo(src=`/images/users/${comment.user.photo}`, alt="User photo")
-                .post__comment-user-name
-                  p= comment.user.name
-                  span= comment.postedAgo
-              .post__comment-content
-                p= comment.comment
-              - if(user.id === comment.user.id)
-                button.delete-comment(data-comment-id=`${comment.id}`) ❌
+            form.form.form-post-comment
+              .form__group.form__group--comment
+                input#comment.form__input.form__input-comment(type='text', placeholder="Add a comment")
+                button.btn--send
+                  img(src="/images/icons/send.svg", alt="add comment")
 
 
-          .post__buttons 
-            button.post__btn
-              img(src="/images/icons/like.svg", alt="like")
-              p Like
-            button.post__btn#comment-btn
-                img(src="/images/icons/comment.svg", alt="comment")
-                p Comment
+            each comment in post.comments
+              .post__comment
+                .post__comment-user
+                  a(href=`/user/${comment.user.id}`)
+                    img.post__comment-photo(src=`/images/users/${comment.user.photo}`, alt="User photo")
+                  .post__comment-user-name
+                    p= comment.user.name
+                    span= comment.postedAgo
+                .post__comment-content
+                  p= comment.comment
+                - if(user.id === comment.user.id)
+                  button.delete-comment(data-comment-id=`${comment.id}`) ❌
+
+
+            .post__buttons 
+              a.post__btn
+                img(src="/images/icons/like.svg", alt="like")
+                p Like
+              a.post__btn#comment-btn
+                  img(src="/images/icons/comment.svg", alt="comment")
+                  p Comment
 

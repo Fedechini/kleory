@@ -13,7 +13,7 @@
     p.post__likes--qty 0 likes 
     a.post__comments--qty(href=`/post/${post.id}`)= `${post.commentsQuantity} Comments`
   .post__buttons 
-    button.post__btn
+    a(href="#").post__btn
       img(src="/images/icons/like.svg", alt="like")
       p Like
     a(href=`/post/${post.id}`).post__btn

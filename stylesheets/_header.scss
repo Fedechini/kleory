@@ -1,10 +1,11 @@
 .header {
-  background-color: var(--color-background-header);
+  background-color: var(--color-dark-2);
   padding: 0 5rem;
   height: 8rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid var(--color-border);
 
   &__logo {
     border-radius: 50%;
@@ -19,7 +20,7 @@
   &__el,
   &__el:link,
   &__el:visited {
-    color: black;
+    color: var(--color-white-1);
     text-transform: uppercase;
     font-size: 2rem;
     text-decoration: none;
@@ -59,12 +60,12 @@
   padding: 1rem 3rem;
   border-radius: 10rem;
   transition: all 0.3s;
-  border: 1px solid var(--color-primary-black);
+  border: 1px solid var(--color-white-1);
 
   &:hover {
-    background-color: var(--color-primary-black);
-    color: var(--color-primary-white);
+    background-color: var(--color-secondary);
+    color: var(--color-dark-1);
     text-shadow: none;
-    border-color: var(--color-primary-black);
+    border-color: var(--color-secondary);
   }
 }

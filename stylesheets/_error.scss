@@ -18,10 +18,11 @@
     font-weight: 700;
     max-width: 50rem;
     margin: 0 auto;
+    color: var(--color-white-1);
   }
 }
 
 .heading-secondary--error {
-  color: #eb4d4b;
+  color: var(--color-secondary);
   font-size: 3.5rem;
 }

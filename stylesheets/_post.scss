@@ -1,5 +1,5 @@
 .main {
-  background-color: #f7f7f7;
+  background-color: var(--color-dark-1);
   padding: 4rem 3rem;
   min-height: 92vh;
 }
@@ -7,7 +7,8 @@
 .post {
   width: 60%;
   border-radius: 5px;
-  background-color: lightblue;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-dark-2);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -25,13 +26,14 @@
   }
 
   &__user {
-    background-color: rgb(117, 167, 184);
+    background-color: var(--color-dark-3);
     font-weight: 500;
     padding: 0.7rem;
     display: flex;
     align-items: center;
     gap: 1rem;
     position: relative;
+    color: var(--color-white-2);
 
     &--photo {
       height: 5rem;
@@ -56,10 +58,12 @@
     &--title {
       font-size: 2.5rem;
       margin-bottom: 0.75rem;
+      color: var(--color-white-1);
     }
 
     &--body {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+      border-bottom: 1px solid var(--color-border);
+      color: var(--color-white-2);
     }
   }
 
@@ -67,6 +71,7 @@
     padding: 0 0.7rem;
     display: flex;
     justify-content: space-between;
+    color: var(--color-white-2);
   }
 
   &__comments--qty {
@@ -84,14 +89,13 @@
   &__btn,
   &__btn:link,
   &__btn:visited {
-    background-color: rgb(117, 167, 184);
+    background-color: var(--color-dark-3);
     width: 100%;
     padding: 0.6rem;
     text-transform: uppercase;
-    align-items: center;
     transition: all 0.2s;
     font-weight: 500;
-    border: none;
+    border: 1px solid var(--color-border);
     cursor: pointer;
     font-family: inherit;
     display: flex;
@@ -99,11 +103,12 @@
     align-items: center;
     gap: 0.75rem;
     text-decoration: none;
-    color: black;
+    color: var(--color-white-2);
 
     &:hover,
     &:active {
-      background-color: white;
+      background-color: var(--color-secondary);
+      color: var(--color-dark-1);
     }
   }
 
@@ -112,7 +117,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 0.75rem;
-    background-color: rgba(190, 190, 190, 0.5);
+    background-color: var(--color-dark-3);
 
     &-photo {
       height: 4.5rem;
@@ -123,6 +128,7 @@
       display: flex;
       margin: 0 0.75rem;
       gap: 1.25rem;
+      color: var(--color-white-2);
 
       &-name {
         display: flex;
@@ -143,6 +149,7 @@
       margin-left: 2rem;
       max-width: 75%;
       flex: 1;
+      color: var(--color-white-2);
     }
   }
 }

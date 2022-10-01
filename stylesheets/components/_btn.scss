@@ -1,6 +1,7 @@
 .btn,
 .btn:link,
 .btn:visited {
+  color: var(--color-dark-1);
   font-size: 1.6rem;
   padding: 1.4rem 3rem;
   border-radius: 10rem;
@@ -12,7 +13,7 @@
   backface-visibility: hidden;
   border: none;
   cursor: pointer;
-  background-color: rgb(117, 167, 184);
+  background-color: var(--color-secondary);
 
   &:hover {
     transform: translateY(-3px);
@@ -28,7 +29,7 @@
 .btn--small,
 .btn--small:link,
 .btn--small:visited {
-  background-color: rgb(117, 167, 184);
+  background-color: var(--color-secondary);
   color: black;
   font-size: 1.4rem;
   padding: 1.25rem 3rem;
@@ -42,7 +43,7 @@
   border: none;
 
   &:hover {
-    background-color: rgb(111, 179, 202);
+    background-color: var(--color-secondary);
   }
 }
 
