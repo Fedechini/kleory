@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 :root {
   --color-dark-1: rgba(1, 1, 1, 255);
   --color-dark-2: rgba(26, 26, 26, 255);
@@ -41,7 +41,7 @@ html {
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .header {
@@ -67,7 +67,9 @@ body {
   display: flex;
   align-items: center;
 }
-.nav__el, .nav__el:link, .nav__el:visited {
+.nav__el,
+.nav__el:link,
+.nav__el:visited {
   color: var(--color-white-1);
   text-transform: uppercase;
   font-size: 2rem;
@@ -80,20 +82,31 @@ body {
   cursor: pointer;
   font-family: inherit;
 }
-.nav__el:hover, .nav__el:active, .nav__el:link:hover, .nav__el:link:active, .nav__el:visited:hover, .nav__el:visited:active {
+.nav__el:hover,
+.nav__el:active,
+.nav__el:link:hover,
+.nav__el:link:active,
+.nav__el:visited:hover,
+.nav__el:visited:active {
   transform: translate(-2px);
   text-shadow: 0 0.7rem 1rem rgba(0, 0, 0, 0.25);
 }
-.nav__el:not(:last-child), .nav__el:link:not(:last-child), .nav__el:visited:not(:last-child) {
+.nav__el:not(:last-child),
+.nav__el:link:not(:last-child),
+.nav__el:visited:not(:last-child) {
   margin-right: 3rem;
 }
 @media (max-width: 600px) {
-  .nav__el:not(:last-child), .nav__el:link:not(:last-child), .nav__el:visited:not(:last-child) {
+  .nav__el:not(:last-child),
+  .nav__el:link:not(:last-child),
+  .nav__el:visited:not(:last-child) {
     margin-right: 1rem;
   }
 }
 @media (max-width: 600px) {
-  .nav__el, .nav__el:link, .nav__el:visited {
+  .nav__el,
+  .nav__el:link,
+  .nav__el:visited {
     font-size: 1.75rem;
   }
 }
@@ -229,7 +242,9 @@ body {
   gap: 0.5rem;
   padding: 0.7rem;
 }
-.post__btn, .post__btn:link, .post__btn:visited {
+.post__btn,
+.post__btn:link,
+.post__btn:visited {
   background-color: var(--color-dark-2);
   width: 100%;
   padding: 0.6rem;
@@ -246,7 +261,12 @@ body {
   text-decoration: none;
   color: var(--color-white-2);
 }
-.post__btn:hover, .post__btn:active, .post__btn:link:hover, .post__btn:link:active, .post__btn:visited:hover, .post__btn:visited:active {
+.post__btn:hover,
+.post__btn:active,
+.post__btn:link:hover,
+.post__btn:link:active,
+.post__btn:visited:hover,
+.post__btn:visited:active {
   background-color: var(--color-secondary);
   color: var(--color-dark-1);
 }
@@ -356,9 +376,9 @@ body {
 }
 @media (max-width: 600px) {
   .login-form,
-.signup-form,
-.forgot-password-form,
-.reset-password-form {
+  .signup-form,
+  .forgot-password-form,
+  .reset-password-form {
     padding: 2rem 3rem;
   }
 }
@@ -380,7 +400,9 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-.forgot-password-link, .forgot-password-link:link, .forgot-password-link:visited,
+.forgot-password-link,
+.forgot-password-link:link,
+.forgot-password-link:visited,
 .have-account-link,
 .have-account-link:link,
 .have-account-link:visited {
@@ -389,7 +411,7 @@ body {
 }
 @media (max-width: 600px) {
   .forgot-password,
-.have-account {
+  .have-account {
     gap: 1.75rem;
   }
 }
@@ -504,14 +526,14 @@ body {
 }
 @media (max-width: 900px) {
   .side-nav > li > a:link,
-.side-nav > li a:visited {
+  .side-nav > li a:visited {
     padding: 1rem 1.5rem;
     font-size: 1.25rem;
   }
 }
 @media (max-width: 600px) {
   .side-nav > li > a:link,
-.side-nav > li a:visited {
+  .side-nav > li a:visited {
     padding: 0.5rem;
     font-size: 1.5rem;
   }
@@ -632,7 +654,8 @@ body {
     padding: 1rem 3rem;
   }
 }
-.friends-accept, .friends-reject {
+.friends-accept,
+.friends-reject {
   background-color: rgba(0, 180, 0, 0.75);
   border-radius: 50%;
   display: flex;
@@ -643,15 +666,18 @@ body {
   border: none;
   cursor: pointer;
 }
-.friends-accept:hover, .friends-reject:hover {
+.friends-accept:hover,
+.friends-reject:hover {
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
   transform: translateY(-2px);
 }
-.friends-accept:active, .friends-reject:active {
+.friends-accept:active,
+.friends-reject:active {
   transform: translateY(0);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
-.friends-accept:focus, .friends-reject:focus {
+.friends-accept:focus,
+.friends-reject:focus {
   outline: none;
   outline-offset: 3px;
 }
@@ -736,8 +762,8 @@ body {
 }
 @media (max-width: 600px) {
   .btn,
-.btn:link,
-.btn:visited {
+  .btn:link,
+  .btn:visited {
     padding: 0.75rem 1.5rem;
   }
 }
@@ -760,8 +786,8 @@ body {
 }
 @media (max-width: 600px) {
   .btn--small,
-.btn--small:link,
-.btn--small:visited {
+  .btn--small:link,
+  .btn--small:visited {
     padding: 1rem 2rem;
   }
 }
@@ -854,7 +880,8 @@ body {
 .form__input:focus:invalid {
   border-bottom: 3px solid #ff7730;
 }
-.form__input-comment:focus, .form__input-comment:invalid {
+.form__input-comment:focus,
+.form__input-comment:invalid {
   border-bottom: none;
 }
 
