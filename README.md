@@ -36,3 +36,4 @@ Users should be able to:
 ### Live Website
 
 - Live Preview - [Kleory](https://kleory.onrender.com)
+- Log in credentials for testing purposes - USERNAME: leo@example.com PASSWORD: test1234
