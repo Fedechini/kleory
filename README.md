@@ -11,6 +11,7 @@ Users should be able to:
 - See other user profile.
 - Have a profile page.
 - View the optimal layout for the interface depending on their device's screen size.
+- Receive welcome email and reset password email
 - And much more...
 
 ### Screenshot
@@ -29,4 +30,5 @@ Users should be able to:
 - MongoDB
 - Mongoose
 - Pug
+- Axios
 - & More

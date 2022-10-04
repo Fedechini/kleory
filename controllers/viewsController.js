@@ -104,8 +104,6 @@ exports.getMyFriends = async (req, res, next) => {
     .populate('friendReq')
     .populate({ path: 'friends', select: 'name photo' });
 
-  console.log(user);
-
   res.status(200).render('friends', {
     title: 'My Friends',
     user,

@@ -5,7 +5,7 @@ export const sendReq = async (userId) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: `http://127.0.0.1:3000/api/v1/friends`,
+      url: `/api/v1/friends`,
       data: {
         to: userId,
       },
@@ -23,7 +23,7 @@ export const acceptReq = async (reqId) => {
   try {
     const res = await axios({
       method: 'GET',
-      url: `http://127.0.0.1:3000/api/v1/friends/acceptFriend/${reqId}`,
+      url: `/api/v1/friends/acceptFriend/${reqId}`,
     });
 
     if (res.data.status === 'success') {
@@ -38,7 +38,7 @@ export const rejectReq = async (reqId) => {
   try {
     const res = await axios({
       method: 'DELETE',
-      url: `http://127.0.0.1:3000/api/v1/friends/rejectFriend/${reqId}`,
+      url: `/api/v1/friends/rejectFriend/${reqId}`,
     });
 
     if (res.status === 204) {
@@ -53,7 +53,7 @@ export const deleteFriend = async (friendId) => {
   try {
     const res = await axios({
       method: 'DELETE',
-      url: `http://127.0.0.1:3000/api/v1/friends/deleteFriend/${friendId}`,
+      url: `/api/v1/friends/deleteFriend/${friendId}`,
     });
 
     if (res.status === 204) {

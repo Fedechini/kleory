@@ -8,6 +8,7 @@ const xss = require('xss-clean');
 const mongoSanitize = require('express-mongo-sanitize');
 const hpp = require('hpp');
 const favicon = require('serve-favicon');
+const compression = require('compression');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -39,6 +40,9 @@ app.use(xss());
 
 // parameter polution
 app.use(hpp());
+
+// compression
+app.use(compression());
 
 // allow max requests per hs from same IP
 const limiter = rateLimit({

@@ -7,12 +7,14 @@
     "start:prod": "NODE_ENV=production nodemon server.js",
     "debug": "ndb server.js",
     "sass": "sass --no-source-map --watch stylesheets/main.scss public/css/main.css",
-    "watch:js": "parcel watch ./javascripts/index.js --out-dir ./public/js --out-file bundle.js --public-url /js"
+    "watch:js": "parcel watch ./javascripts/index.js --out-dir ./public/js --out-file bundle.js --public-url /js",
+    "build:js": "parcel build ./javascripts/index.js --out-dir ./public/js --out-file bundle.js --public-url /js"
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
+    "compression": "^1.7.4",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.0.1",

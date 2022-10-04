@@ -5,7 +5,7 @@ export const comment = async (comment, postId) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: `http://127.0.0.1:3000/api/v1/posts/${postId}/comments`,
+      url: `/api/v1/posts/${postId}/comments`,
       data: {
         comment,
       },
@@ -23,7 +23,7 @@ export const deleteComment = async (commentId) => {
   try {
     const res = await axios({
       method: 'DELETE',
-      url: `http://127.0.0.1:3000/api/v1/comments/${commentId}`,
+      url: `/api/v1/comments/${commentId}`,
     });
 
     if (res.status === 204) {
